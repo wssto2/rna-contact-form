@@ -70,6 +70,6 @@
   "module": "dist/main.esm.js",
   "unpkg": "dist/main.min.js",
   "browser": {
-    "./sfc": "src/main.vue"
+    "./sfc": "src/RnaContactForm.vue"
   }
 }

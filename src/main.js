@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import App from './App.vue'
+import RnaContactForm from './RnaContactForm.vue'
 
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(App),
+  render: h => h(RnaContactForm),
 }).$mount('#rna-contact-form')
