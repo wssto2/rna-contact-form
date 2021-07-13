@@ -1,23 +1,42 @@
 {
-  "name": "rna-contact-form",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@wssto2/rna-contact-form",
+  "version": "1.0.0",
+  "author": "Web studio Sto2 d.o.o. <info@sto2.hr>",
+  "private": false,
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wssto2/rna-contact-form.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wssto2/rna-contact-form/issues"
+  },
+  "homepage": "https://github.com/wssto2/rna-contact-form",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "buildOld": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/main.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/main.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/main.min.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
   "devDependencies": {
+    "@rollup/plugin-buble": "^0.21.3",
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "@rollup/plugin-image": "^2.0.6",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "rollup": "^1.17.0",
+    "rollup-plugin-vue": "^5.0.1",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -38,5 +57,19 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "description": "Renault Nissan Dacia Contact Form",
+  "keywords": [
+    "Renault",
+    "Nissan",
+    "Dacia",
+    "Contact",
+    "Form"
+  ],
+  "main": "dist/main.umd.js",
+  "module": "dist/main.esm.js",
+  "unpkg": "dist/main.min.js",
+  "browser": {
+    "./sfc": "src/main.vue"
+  }
 }
