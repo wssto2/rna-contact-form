@@ -1,5 +1,9 @@
-* {
+#rna-contact-form * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    font-size: 14px;
+    line-height: 22px;
 }
 
 #rna-contact-form {
@@ -7,8 +11,8 @@
     font-family: Nissan,Verdana,Arial,sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
-    font-size: .875em;
-    line-height: 1.375;
+    font-size: 14px;
+    line-height: 22px;
 }
 
 #rna-contact-form p {
@@ -299,6 +303,8 @@
     margin: 0;
     border: 1px solid #ececec;
     border-bottom: 0 solid #ccc;
+    display: flex;
+    flex-direction: row;
 }
 
 #rna-contact-form .range-tab > li {
