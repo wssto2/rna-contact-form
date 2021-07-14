@@ -1,12 +1,5 @@
-const path = require('path');
-
 module.exports = {
-    model: "production",
-    resolve: {
-        alias: {
-            '@': path.join(__dirname, './src')
-        }
-    },
+    mode: "production",
     module: {
         loaders: [
             {

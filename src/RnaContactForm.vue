@@ -135,11 +135,11 @@
 
 <script>
 
-import TextField from "@/components/TextField";
-import SelectField from "@/components/SelectField";
-import GdprRadio from "@/components/GdprRadio";
-import CustomerType from "@/components/CustomerType";
-import LegalAccordion from "@/components/LegalAccordion";
+import TextField from "./components/TextField.vue";
+import SelectField from "./components/SelectField.vue";
+import GdprRadio from "./components/GdprRadio.vue";
+import CustomerType from "./components/CustomerType.vue";
+import LegalAccordion from "./components/LegalAccordion.vue";
 import Validator from "Validator";
 
 export default {
@@ -167,7 +167,7 @@ export default {
 
     created() {
         if (this.isCountryValid()) {
-            this.i18n = require(`@/lang/${this.country}`).default;
+            this.i18n = require(`./lang/${this.country}`).default;
         } else {
             throw `Unknown country ${this.country}`;
         }
