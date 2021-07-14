@@ -142,6 +142,9 @@ import CustomerType from "./components/CustomerType.vue";
 import LegalAccordion from "./components/LegalAccordion.vue";
 import Validator from "Validator";
 
+import './assets/css/fonts.css';
+import './assets/css/base.css';
+
 export default {
     name: 'RnaContactForm',
 
@@ -323,8 +326,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-    @import './assets/css/fonts.css';
-    @import './assets/css/base.css';
-</style>

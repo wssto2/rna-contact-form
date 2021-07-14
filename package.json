@@ -1,6 +1,6 @@
 {
   "name": "@wssto2/rna-contact-form",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "Web studio Sto2 d.o.o. <info@sto2.hr>",
   "private": false,
   "license": "ISC",
@@ -38,6 +38,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "rollup": "^1.17.0",
+    "rollup-plugin-css-bundle": "^1.0.4",
     "rollup-plugin-uglify": "^6.0.4",
     "rollup-plugin-vue": "^5.0.1",
     "vue-template-compiler": "^2.6.11"
