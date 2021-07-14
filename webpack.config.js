@@ -1,4 +1,5 @@
 module.exports = {
+    model: "production",
     module: {
         loaders: [
             {

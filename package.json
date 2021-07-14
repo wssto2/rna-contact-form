@@ -1,6 +1,6 @@
 {
   "name": "@wssto2/rna-contact-form",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "Web studio Sto2 d.o.o. <info@sto2.hr>",
   "private": false,
   "license": "ISC",
@@ -22,6 +22,7 @@
     "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/main.min.js"
   },
   "dependencies": {
+    "Validator": "^1.1.2",
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
@@ -29,6 +30,7 @@
     "@rollup/plugin-buble": "^0.21.3",
     "@rollup/plugin-commonjs": "^11.1.0",
     "@rollup/plugin-image": "^2.0.6",
+    "@rollup/plugin-node-resolve": "^13.0.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
@@ -36,6 +38,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "rollup": "^1.17.0",
+    "rollup-plugin-uglify": "^6.0.4",
     "rollup-plugin-vue": "^5.0.1",
     "vue-template-compiler": "^2.6.11"
   },

@@ -2,12 +2,14 @@ import commonjs from '@rollup/plugin-commonjs'; // Convert CommonJS modules to E
 import vue from 'rollup-plugin-vue'; // Handle .vue SFC files
 import buble from '@rollup/plugin-buble'; // Transpile/polyfill with reasonable browser support
 import image from '@rollup/plugin-image';
+import { uglify } from "rollup-plugin-uglify";
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default {
     input: 'src/wrapper.js', // Path relative to package.json
     output: {
         name: 'RnaContactForm',
-        exports: 'named',
+        exports: 'named'
     },
     plugins: [
         commonjs(),
@@ -15,7 +17,9 @@ export default {
             css: true, // Dynamically inject css as a <style> tag
             compileTemplate: true, // Explicitly convert template to render function
         }),
-        buble(), // Transpile to ES5,
-        image()
+        buble({ exclude: 'node_modules/**' }), // Transpile to ES5,
+        image(),
+        uglify(),
+        //nodeResolve({ browser: true, jsnext: true })
     ],
 };
