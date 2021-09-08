@@ -1,6 +1,6 @@
 {
   "name": "@wssto2/rna-contact-form",
-  "version": "2.0.4",
+  "version": "2.0.6",
   "author": "Web studio Sto2 d.o.o. <info@sto2.hr>",
   "private": false,
   "license": "ISC",
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "Validator": "^1.1.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },

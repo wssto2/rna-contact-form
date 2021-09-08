@@ -99,7 +99,6 @@
 
                     <!-- GDPR: SMS -->
                     <GdprRadio
-                        v-show="hasEnteredTelephone"
                         :label="$t('fields.gdpr_contact_sms')"
                         name="kontakt_kanal_sms"
                         v-model="form.kontakt_kanal_sms"
@@ -114,7 +113,6 @@
 
                     <!-- GDPR: Obicna posta -->
                     <GdprRadio
-                        v-show="hasEnteredFullAddress"
                         :label="$t('fields.gdpr_contact_postal')"
                         name="kontakt_kanal_posta"
                         v-model="form.kontakt_kanal_posta"
@@ -134,7 +132,7 @@
 </template>
 
 <script>
-
+import axios from "axios";
 import TextField from "./components/TextField.vue";
 import SelectField from "./components/SelectField.vue";
 import GdprRadio from "./components/GdprRadio.vue";
@@ -192,6 +190,8 @@ export default {
         this.validator.extend('requiredlegalinfo', (name, value) => {
             return value && Number(value) === 1;
         });
+
+        this.resolveEndpoints();
     },
 
     data() {
@@ -203,10 +203,15 @@ export default {
             validator: null,
             validatorErrors: [],
 
+            gdprScreenshotEndpoint: null,
+            submitEndpoint: null,
+
+            screenshotTest: true,
+
             form: {
                 isVehicleLagerForm: false,
                 forma_ver: 3,
-                odakle: null,
+                odakle: 'RV',
                 marka: null,
                 rvBIR: null,
                 rvID: null,
@@ -253,7 +258,7 @@ export default {
                 { id: 0, name: this.$t('fields.status.select') },
                 { id: 1, name: this.$t('fields.status.sir') },
                 { id: 2, name: this.$t('fields.status.lady') },
-                { id: 3, name: this.$t('fields.status.miss') }
+                //{ id: 3, name: this.$t('fields.status.miss') }
             ];
         },
 
@@ -270,6 +275,19 @@ export default {
     },
 
     methods: {
+
+        resolveEndpoints() {
+            let arvUrls = {
+                hr: "https://rabljena-vozila.renault.hr/",
+                si: "https://rabljena-vozila.renault.si/",
+                rs: "https://polovna-vozila.renault.rs/",
+                ba: "https://rabljena-vozila.renault.ba/",
+                me: "https://upotrebljavana-vozila.renault.me/"
+            }
+
+            this.gdprScreenshotEndpoint = arvUrls[this.country] + '/forms/screenshot_v3.php';
+            this.submitEndpoint = arvUrls[this.country] + '/forms/send-gdpr/rabljena_vozila/' + this.country + '/';
+        },
 
         isCountryValid() {
             return this.allowedCountries.indexOf(this.country) !== -1;
@@ -322,6 +340,29 @@ export default {
                     }
                 }
             }
+
+            if (! this.validator.fails()) {
+                this.createGdprScreenshot().then(() => {
+                    if (! this.screenshotTest) {
+                        this.submitToMainServer();
+                    }
+                });
+            }
+        },
+
+        createGdprScreenshot() {
+            return new Promise((resolve, reject) => {
+                axios.post(this.gdprScreenshotEndpoint, this.form).then((response) => {
+                    this.form.pdf_url = response.data.url;
+                    resolve(response);
+                }).catch((err) => {
+                    reject(err);
+                })
+            })
+        },
+
+        submitToMainServer() {
+
         }
     }
 }
