@@ -16,7 +16,7 @@
             </label>
         </div>
         <template v-if="error">
-            <span v-for="(err, errIndex) in error" :key="`${name}_error_${errIndex}`" class="error-message">{{ err }}</span>
+            <span class="error-message">{{ error }}</span>
         </template>
     </div>
 </template>
@@ -38,7 +38,7 @@ export default {
         value: [Boolean, String, Number],
 
         error: {
-            type: Array
+            type: String
         },
 
         required: {

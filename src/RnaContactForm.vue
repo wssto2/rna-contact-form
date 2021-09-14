@@ -1,7 +1,7 @@
 <template>
     <div id="rna-contact-form" :class="[brand]">
         <div class="c_056">
-            <form method="post" class="customer-details-content" novalidate @submit.prevent="onSubmit">
+            <form method="post" class="customer-details-content" novalidate @change.passive="onFormChange" @submit.prevent="onSubmit">
                 <!-- Vrsta korisnika -->
                 <CustomerType
                     :physical-label="$t('fields.customer_type.physical')"
@@ -138,7 +138,6 @@ import SelectField from "./components/SelectField.vue";
 import GdprRadio from "./components/GdprRadio.vue";
 import CustomerType from "./components/CustomerType.vue";
 import LegalAccordion from "./components/LegalAccordion.vue";
-import Validator from "Validator";
 
 import './assets/css/fonts.css';
 import './assets/css/base.css';
@@ -149,12 +148,35 @@ export default {
     props: {
         brand: {
             type: String,
-            default: 'nissan'
+            default: 'nissan',
+            required: true
         },
 
         country: {
             type: String,
-            default: 'hr'
+            default: 'hr',
+            required: true
+        },
+
+        source: {
+            type: String,
+            default: 'NV',
+            required: true
+        },
+
+        bir: {
+            type: [String, Number],
+            required: true
+        },
+
+        vehicleId: {
+            type: [String, Number],
+            required: true
+        },
+
+        newVehicle: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -173,23 +195,11 @@ export default {
             throw `Unknown country ${this.country}`;
         }
 
-        this.validator = Validator.make(this.form, this.rules, this.$t('validator'));
-
-        this.validator.extend('requiredcompany', (name, value) => {
-            if (Number(this.form.pravna_osoba) === 1) {
-                return value && value.length > 0;
-            }
-
-            return true;
-        });
-
-        this.validator.extend('requiredcontactchannel', (name, value) => {
-            return value !== null && value >= 0;
-        });
-
-        this.validator.extend('requiredlegalinfo', (name, value) => {
-            return value && Number(value) === 1;
-        });
+        this.form.odakle = this.source;
+        this.form.marka = this.brand;
+        this.form.rvBIR = this.bir;
+        this.form.rvID = this.vehicleId;
+        this.form.novo_vozilo = this.newVehicle;
 
         this.resolveEndpoints();
     },
@@ -197,20 +207,16 @@ export default {
     data() {
         return {
             i18n: {},
-
             allowedCountries: ['hr', 'si', 'rs', 'ba', 'me'],
-
-            validator: null,
+            isValidated: false,
             validatorErrors: [],
-
             gdprScreenshotEndpoint: null,
             submitEndpoint: null,
-
             screenshotTest: true,
 
             form: {
                 isVehicleLagerForm: false,
-                forma_ver: 3,
+                forma_ver: 4,
                 odakle: 'RV',
                 marka: null,
                 rvBIR: null,
@@ -238,16 +244,6 @@ export default {
                 kontakt_kanal_posta: null,
                 procitane_pravne_obavijesti: null,
                 koncesionari_id: 0
-            },
-
-            rules: {
-                status: ['required', 'in:1,2,3'],
-                ime: ['required'],
-                prezime: ['required'],
-                tvrtka: ['requiredcompany'],
-                email: ['required', 'email'],
-                kontakt_kanal_email: ['requiredcontactchannel'],
-                procitane_pravne_obavijesti: ['requiredlegalinfo']
             }
         }
     },
@@ -262,15 +258,51 @@ export default {
             ];
         },
 
-        hasEnteredTelephone() {
-            return this.form.tel && this.form.tel.length > 0;
+        errorMessages() {
+            return {
+                status: 'Molimo da odaberete svoj status.',
+                ime: 'Molimo da unesete svoje ime.',
+                prezime: 'Molimo da unesete svoje prezime.',
+                tvrtka: 'Molimo da unesete svoju tvrtku.',
+                email: 'Molimo da unesete svoj e-mail.',
+                ulica: 'Molimo da unesete svoju ulicu.',
+                kbr: 'Molimo da unesete svoj kućni broj.',
+                pb: 'Molimo da unesete svoj poštanski broj.',
+                mjesto: 'Molimo da unesete svoj grad.',
+                tel: 'Molimo da unesete svoj broj telefona.',
+                kontakt_kanal_email: 'Molimo da unesite svoj odabir.',
+                procitane_pravne_obavijesti: 'Molimo da pročitate pravne obavijesti.'
+            }
         },
 
-        hasEnteredFullAddress() {
-            return this.form.ulica && this.form.ulica.length > 0
-                && this.form.kbr && this.form.kbr.length > 0
-                && this.form.pb && this.form.pb.length > 0
-                && this.form.mjesto && this.form.mjesto.length > 0;
+        isTelephoneChannelSelected() {
+            return !!this.form.kontakt_kanal_telefon;
+        },
+
+        isSmsChannelSelected() {
+            return !!this.form.kontakt_kanal_sms;
+        },
+
+        isMailChannelSelected() {
+            return !!this.form.kontakt_kanal_posta;
+        },
+
+        requiredFields() {
+            let requiredFields = ['status', 'ime', 'prezime', 'email', 'kontakt_kanal_email', 'procitane_pravne_obavijesti'];
+
+            if (this.form.pravna_osoba) {
+                requiredFields.push('tvrtka');
+            }
+
+            if (this.isTelephoneChannelSelected || this.isSmsChannelSelected) {
+                requiredFields.push('tel');
+            }
+
+            if (this.isMailChannelSelected) {
+                requiredFields.push('ulica', 'kbr', 'pb', 'mjesto');
+            }
+
+            return requiredFields;
         }
     },
 
@@ -285,8 +317,8 @@ export default {
                 me: "https://upotrebljavana-vozila.renault.me/"
             }
 
-            this.gdprScreenshotEndpoint = arvUrls[this.country] + '/forms/screenshot_v3.php';
-            this.submitEndpoint = arvUrls[this.country] + '/forms/send-gdpr/rabljena_vozila/' + this.country + '/';
+            this.gdprScreenshotEndpoint = arvUrls[this.country] + 'forms/screenshot_v3.php';
+            this.submitEndpoint = arvUrls[this.country] + 'forms/send-gdpr/rabljena_vozila/' + this.country + '/';
         },
 
         isCountryValid() {
@@ -315,22 +347,57 @@ export default {
         },
 
         getFieldError(field) {
-            if (this.validatorErrors && field in this.validatorErrors) {
-                return this.validatorErrors [field];
+            if (this.validatorErrors.length > 0 && this.validatorErrors.indexOf(field) !== -1) {
+                return this.errorMessages [field] || 'Molimo popunite obavezno polje!';
             }
 
             return null;
         },
 
-        onSubmit() {
-            if (this.validator.fails()) {
-                this.validatorErrors = this.validator.getErrors();
-                console.log(this.validatorErrors);
+        validate() {
+            this.isValidated = true;
 
+            let errors = [];
+            for (let fieldIndex in this.requiredFields) {
+                let field = this.requiredFields [fieldIndex];
+                let valid = !!this.form [field];
+
+                if (valid && field === 'status') {
+                    valid = Number(this.form [field]) > 0;
+                }
+
+                if (valid && field === 'email') {
+                    valid = this.validateEmail(this.form [field]);
+                }
+
+                if (!valid) {
+                    errors.push(field);
+                }
+            }
+
+            this.validatorErrors = errors;
+        },
+
+        validateEmail(email) {
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        },
+
+        onFormChange() {
+            if (this.isValidated) {
+                this.validate();
+            }
+        },
+
+        onSubmit() {
+
+            this.validate();
+
+            if (this.validatorErrors.length > 0) {
                 /**
                  * Focus first field with error
                  */
-                let firstError = Object.keys(this.validatorErrors)[0] || null;
+                let firstError = this.validatorErrors[0] || null;
 
                 if (firstError) {
                     const el = document.querySelector(`[name="${firstError}"]`);
@@ -341,7 +408,8 @@ export default {
                 }
             }
 
-            if (! this.validator.fails()) {
+            if (this.validatorErrors.length === 0) {
+                console.log("OK");
                 this.createGdprScreenshot().then(() => {
                     if (! this.screenshotTest) {
                         this.submitToMainServer();

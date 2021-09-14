@@ -61,7 +61,7 @@
         </div>
         <p class="legal-info-disclamer">Obavezno pročitajte.</p>
         <template v-if="error">
-            <span v-for="(err, errIndex) in error" :key="`pravne_obavijesti_error_${errIndex}`" class="error-message">{{ err }}</span>
+            <span class="error-message">{{ error }}</span>
         </template>
     </div>
 </template>
@@ -72,7 +72,7 @@ export default {
 
     props: {
         error: {
-            type: Array
+            type: String
         }
     },
 

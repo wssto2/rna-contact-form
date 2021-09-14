@@ -13,7 +13,7 @@
                 </select>
                 <span :class="['selectedValue', {'isInvalid': error}]">{{ selectedValue }}</span>
                 <template v-if="error">
-                    <span v-for="(err, errIndex) in error" :key="`${name}_error_${errIndex}`" class="error-message">{{ err }}</span>
+                    <span class="error-message">{{ error }}</span>
                 </template>
             </div>
         </div>
@@ -44,7 +44,7 @@ export default {
         },
 
         error: {
-            type: Array
+            type: String
         },
 
         options: {

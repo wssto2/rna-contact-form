@@ -5,7 +5,7 @@
             <div class="form-group-container">
                 <input :id="name" :name="name" :required="required" type="text" :class="[{'isInvalid': error}]" @input="$emit('input', $event.target.value)">
                 <template v-if="error">
-                    <span v-for="(err, errIndex) in error" :key="`${name}_error_${errIndex}`" class="error-message">{{ err }}</span>
+                    <span class="error-message">{{ error }}</span>
                 </template>
             </div>
             <span class="help-block" v-if="help">
@@ -43,7 +43,7 @@ export default {
         },
 
         error: {
-            type: Array
+            type: String
         }
     }
 }
