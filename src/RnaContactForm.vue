@@ -4,13 +4,13 @@
             <form method="post" class="customer-details-content" novalidate @change.passive="onFormChange" @submit.prevent="onSubmit">
                 <!-- Vrsta korisnika -->
                 <CustomerType
-                    :physical-label="$t('fields.customer_type.physical')"
-                    :legal-label="$t('fields.customer_type.legal')"
+                    :physical-label="trans('fields.customer_type.physical')"
+                    :legal-label="trans('fields.customer_type.legal')"
                     v-model="form.pravna_osoba" />
 
                 <!-- Titula korisnika -->
                 <SelectField
-                    :label="$t('fields.status.status')"
+                    :label="trans('fields.status.status')"
                     name="status"
                     :options="statusOptions"
                     v-model="form.status"
@@ -19,7 +19,7 @@
 
                 <!-- Ime -->
                 <TextField
-                    :label="$t('fields.name')"
+                    :label="trans('fields.name')"
                     name="ime"
                     v-model="form.ime"
                     required
@@ -27,7 +27,7 @@
 
                 <!-- Prezime -->
                 <TextField
-                    :label="$t('fields.last_name')"
+                    :label="trans('fields.last_name')"
                     name="prezime"
                     v-model="form.prezime"
                     required
@@ -36,7 +36,7 @@
                 <!-- Tvrtka -->
                 <TextField
                     v-show="Number(form.pravna_osoba) === 1"
-                    :label="$t('fields.company')"
+                    :label="trans('fields.company')"
                     name="tvrtka"
                     v-model="form.tvrtka"
                     required
@@ -44,7 +44,7 @@
 
                 <!-- Email -->
                 <TextField
-                    :label="$t('fields.email')"
+                    :label="trans('fields.email')"
                     name="email"
                     v-model="form.email"
                     required
@@ -52,68 +52,68 @@
 
                 <!-- Ulica -->
                 <TextField
-                    :label="$t('fields.street')"
+                    :label="trans('fields.street')"
                     name="ulica"
                     v-model="form.ulica"
                     :error="getFieldError('ulica')" />
 
                 <!-- Kucni broj -->
                 <TextField
-                    :label="$t('fields.house_number')"
+                    :label="trans('fields.house_number')"
                     name="kbr"
                     v-model="form.kbr"
                     :error="getFieldError('kbr')" />
 
                 <!-- Postanski broj -->
                 <TextField
-                    :label="$t('fields.postal_code')"
+                    :label="trans('fields.postal_code')"
                     name="pb"
                     v-model="form.pb"
                     :error="getFieldError('pb')" />
 
                 <!-- Grad -->
                 <TextField
-                    :label="$t('fields.city')"
+                    :label="trans('fields.city')"
                     name="mjesto"
                     v-model="form.mjesto"
                     :error="getFieldError('mjesto')" />
 
                 <!-- Broj telefona -->
                 <TextField
-                    :label="$t('fields.telephone')"
+                    :label="trans('fields.telephone')"
                     name="tel"
-                    :help="$t('fields.telephone_help')"
+                    :help="trans('fields.telephone_help')"
                     v-model="form.tel"
                     :error="getFieldError('tel')" />
 
                 <!-- GDPR -->
                 <div class="gdpr section">
-                    <p>{{ $t('gdpr_title') }}</p>
+                    <p>{{ trans('gdpr_title') }}</p>
 
                     <!-- GDPR: Email -->
                     <GdprRadio
-                        :label="$t('fields.gdpr_contact_email')"
+                        :label="trans('fields.gdpr_contact_email')"
                         name="kontakt_kanal_email"
                         v-model="form.kontakt_kanal_email"
                         :error="getFieldError('kontakt_kanal_email')" />
 
                     <!-- GDPR: SMS -->
                     <GdprRadio
-                        :label="$t('fields.gdpr_contact_sms')"
+                        :label="trans('fields.gdpr_contact_sms')"
                         name="kontakt_kanal_sms"
                         v-model="form.kontakt_kanal_sms"
                         :error="getFieldError('kontakt_kanal_sms')" />
 
                     <!-- GDPR: Telefon -->
                     <GdprRadio
-                        :label="$t('fields.gdpr_contact_telephone')"
+                        :label="trans('fields.gdpr_contact_telephone')"
                         name="kontakt_kanal_telefon"
                         v-model="form.kontakt_kanal_telefon"
                         :error="getFieldError('kontakt_kanal_telefon')" />
 
                     <!-- GDPR: Obicna posta -->
                     <GdprRadio
-                        :label="$t('fields.gdpr_contact_postal')"
+                        :label="trans('fields.gdpr_contact_postal')"
                         name="kontakt_kanal_posta"
                         v-model="form.kontakt_kanal_posta"
                         :error="getFieldError('kontakt_kanal_posta')" />
@@ -124,7 +124,7 @@
                     :error="getFieldError('procitane_pravne_obavijesti')" />
 
                 <div class="submit-form">
-                    <button autocomplete="off" type="submit" class="submit-form-button">{{ $t('submit') }}</button>
+                    <button autocomplete="off" type="submit" class="submit-form-button">{{ trans('submit') }}</button>
                 </div>
             </form>
         </div>
@@ -251,10 +251,10 @@ export default {
     computed: {
         statusOptions() {
             return [
-                { id: 0, name: this.$t('fields.status.select') },
-                { id: 1, name: this.$t('fields.status.sir') },
-                { id: 2, name: this.$t('fields.status.lady') },
-                //{ id: 3, name: this.$t('fields.status.miss') }
+                { id: 0, name: this.trans('fields.status.select') },
+                { id: 1, name: this.trans('fields.status.sir') },
+                { id: 2, name: this.trans('fields.status.lady') },
+                //{ id: 3, name: this.trans('fields.status.miss') }
             ];
         },
 
@@ -325,7 +325,7 @@ export default {
             return this.allowedCountries.indexOf(this.country) !== -1;
         },
 
-        $t(param) {
+        trans(param) {
             let obj = this.i18n;
 
             if (param.indexOf('.') !== -1) {
