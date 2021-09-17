@@ -443,6 +443,30 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+#rna-contact-form h2 {
+    font-size: 28px;
+    font-weight: lighter;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    position: relative;
+    padding-top: 20px;
+}
+
+#rna-contact-form h2::before {
+    border-top: 6px solid #c3002f;
+    content: " ";
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 2.5em;
+}
+
+#rna-contact-form .c_056_1 h2 {
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #c1c1c1;
+    padding-bottom: 30px;
+}
+
 @media screen and (max-width: 990px) {
     #rna-contact-form .range-tab > li {
         width: 100%;

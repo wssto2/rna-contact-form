@@ -1,7 +1,18 @@
 <template>
     <div id="rna-contact-form" :class="[brand]">
         <div class="c_056">
-            <form method="post" class="customer-details-content" novalidate @change.passive="onFormChange" @submit.prevent="onSubmit">
+
+            <div v-if="!isSubmitting && !isError && isSubmitted" class="customer-details-content c_056_1">
+                <h2>{{ Number(form.novo_vozilo) === 1 ? trans('messages.success.title_new_vehicle') : trans('messages.success.title_used_vehicle') }}</h2>
+                <p v-html="Number(form.novo_vozilo) === 1 ? trans('messages.success.description_new_vehicle') : trans('messages.success.description_used_vehicle')"></p>
+            </div>
+
+            <div v-if="!isSubmitting && isError" class="customer-details-content c_056_1">
+                <h2>{{ Number(form.novo_vozilo) === 1 ? trans('messages.error.title_new_vehicle') : trans('messages.error.title_used_vehicle') }}</h2>
+                <p v-html="Number(form.novo_vozilo) === 1 ? trans('messages.error.description_new_vehicle') : trans('messages.error.description_used_vehicle')"></p>
+            </div>
+
+            <form v-if="!isSubmitting && !isSubmitted && !isError" method="post" class="customer-details-content" novalidate @change.passive="onFormChange" @submit.prevent="onSubmit">
                 <!-- Vrsta korisnika -->
                 <CustomerType
                     :physical-label="trans('fields.customer_type.physical')"
@@ -197,8 +208,8 @@ export default {
 
         this.form.odakle = this.source;
         this.form.marka = this.brand;
-        this.form.rvBIR = this.bir;
-        this.form.rvID = this.vehicleId;
+        this.form.rvBIR = Number(this.bir);
+        this.form.rvID = Number(this.vehicleId);
         this.form.novo_vozilo = this.newVehicle;
 
         this.resolveEndpoints();
@@ -206,13 +217,17 @@ export default {
 
     data() {
         return {
+            isSubmitting: false,
+            isSubmitted: false,
+            isError: false,
+
             i18n: {},
             allowedCountries: ['hr', 'si', 'rs', 'ba', 'me'],
             isValidated: false,
             validatorErrors: [],
             gdprScreenshotEndpoint: null,
             submitEndpoint: null,
-            screenshotTest: true,
+            screenshotTest: false,
 
             form: {
                 isVehicleLagerForm: false,
@@ -413,7 +428,6 @@ export default {
             }
 
             if (this.validatorErrors.length === 0) {
-                console.log("OK");
                 this.createGdprScreenshot().then(() => {
                     if (! this.screenshotTest) {
                         this.submitToMainServer();
@@ -423,18 +437,44 @@ export default {
         },
 
         createGdprScreenshot() {
+            this.isSubmitting = true;
+
             return new Promise((resolve, reject) => {
                 axios.post(this.gdprScreenshotEndpoint, this.form).then((response) => {
                     this.form.pdf_url = response.data.url;
                     resolve(response);
                 }).catch((err) => {
+                    this.isSubmitting = false;
+                    this.isSubmitted = false;
+                    this.isError = true;
                     reject(err);
                 })
             })
         },
 
         submitToMainServer() {
+            this.isSubmitting = true;
+            this.isSubmitted = false;
+            this.isError = false;
 
+            axios.post(this.submitEndpoint, this.form).then((response) => {
+
+                let data = response.data.toString().replace(/\r?\n|\r/g, '').replace(/\t/g, '').replace(' ', '');
+
+                if (data == "1") {
+                    this.isSubmitted = true;
+                    this.isError = false;
+                } else {
+                    this.isSubmitted = false;
+                    this.isError = true;
+                }
+                this.isSubmitting = false;
+
+            }).catch(() => {
+                this.isSubmitted = false;
+                this.isError = true;
+                this.isSubmitting = false;
+            })
         }
     }
 }

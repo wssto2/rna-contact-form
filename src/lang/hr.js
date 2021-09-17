@@ -35,5 +35,19 @@ export default {
         in: "Molimo odaberite :attr",
         requiredcontactchannel: "Molimo unesite svoj izbor",
         requiredlegalinfo: "Molimo počitajte pravne obavijesti"
+    },
+    messages: {
+        success: {
+            title_new_vehicle: 'Hvala Vam za upit o vozilu sa zalihe',
+            title_used_vehicle: 'Hvala Vam za upit o rabljenom vozilu',
+            description_new_vehicle: 'Hvala. Va&scaron; upit je proslije&#273;en odabranom ovla&scaron;tenom koncesionaru. Kontaktirat &#263;e Vas u najkra&#263;em mogu&#263;em roku.',
+            description_used_vehicle: 'Hvala. Va&scaron; upit je proslije&#273;en odabranom ovla&scaron;tenom koncesionaru. Kontaktirat &#263;e Vas u najkra&#263;em mogu&#263;em roku.'
+        },
+        error: {
+            title_new_vehicle: 'Upit o vozilu sa zalihe nije poslan',
+            title_used_vehicle: 'Upit o rabljenom vozilu nije poslan',
+            description_new_vehicle: 'Do&scaron;lo je do pogre&scaron;ke prilikom slanja e-maila. Molimo Vas da poku&scaron;ate ponovo popuniti formu na stranici: <a href="javascript:location.reload();">Kupnja vozila sa zalihe</a>.',
+            description_used_vehicle: 'Do&scaron;lo je do pogre&scaron;ke prilikom slanja e-maila. Molimo Vas da poku&scaron;ate ponovo popuniti formu na stranici: <a href="javascript:location.reload();">Kupnja rabljenog vozila</a>.'
+        }
     }
 }
