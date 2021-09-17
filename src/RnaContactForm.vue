@@ -370,6 +370,10 @@ export default {
                     valid = this.validateEmail(this.form [field]);
                 }
 
+                if (field === 'kontakt_kanal_email') {
+                    valid = this.form [field] !== null;
+                }
+
                 if (!valid) {
                     errors.push(field);
                 }
