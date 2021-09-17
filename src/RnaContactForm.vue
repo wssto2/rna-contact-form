@@ -436,12 +436,20 @@ export default {
             }
         },
 
+        prepareFormData() {
+            let formData = new FormData;
+            for (let key in this.form) {
+                formData.append(key, this.form [key]);
+            }
+            return formData
+        },
+
         createGdprScreenshot() {
             this.isSubmitting = true;
 
             return new Promise((resolve, reject) => {
-                axios.post(this.gdprScreenshotEndpoint, this.form).then((response) => {
-                    this.form.pdf_url = response.data.url;
+                axios.post(this.gdprScreenshotEndpoint, this.prepareFormData()).then((response) => {
+                    this.form.pdf_url = response.data.data.pdf_url;
                     resolve(response);
                 }).catch((err) => {
                     this.isSubmitting = false;
@@ -457,7 +465,7 @@ export default {
             this.isSubmitted = false;
             this.isError = false;
 
-            axios.post(this.submitEndpoint, this.form).then((response) => {
+            axios.post(this.submitEndpoint, this.prepareFormData()).then((response) => {
 
                 let data = response.data.toString().replace(/\r?\n|\r/g, '').replace(/\t/g, '').replace(' ', '');
 
