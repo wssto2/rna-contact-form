@@ -439,7 +439,9 @@ export default {
         prepareFormData() {
             let formData = new FormData;
             for (let key in this.form) {
-                formData.append(key, this.form [key]);
+                if (this.form [key] !== null) {
+                    formData.append(key, this.form [key]);
+                }
             }
             return formData
         },
