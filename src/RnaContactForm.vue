@@ -201,7 +201,7 @@ export default {
         TextField
     },
 
-    async created() {
+    created() {
 
         if (this.isCountryValid()) {
             if (this.country === "hr") {
