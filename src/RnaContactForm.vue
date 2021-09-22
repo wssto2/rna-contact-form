@@ -153,6 +153,8 @@ import LegalAccordion from "./components/LegalAccordion.vue";
 import './assets/css/fonts.css';
 import './assets/css/base.css';
 
+import i18nHr from "./lang/hr";
+
 export default {
     name: 'RnaContactForm',
 
@@ -199,9 +201,12 @@ export default {
         TextField
     },
 
-    created() {
+    async created() {
+
         if (this.isCountryValid()) {
-            this.i18n = require(`./lang/${this.country}`).default;
+            if (this.country === "hr") {
+                this.i18n = i18nHr;
+            }
         } else {
             throw `Unknown country ${this.country}`;
         }
