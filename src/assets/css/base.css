@@ -467,6 +467,39 @@
     padding-bottom: 30px;
 }
 
+#rna-contact-form .vehicle-info {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+#rna-contact-form .vehicle-info .vehicle-column, #rna-contact-form .vehicle-info .concessionaire-column {
+    flex: 1 50%;
+}
+
+#rna-contact-form .vehicle-info .vehicle-column img {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#rna-contact-form .vehicle-info .vehicle-column {
+    padding-right: 10px;
+}
+
+#rna-contact-form .vehicle-info .concessionaire-column {
+    padding-left: 10px;
+}
+
+#rna-contact-form .vehicle-info h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
 @media screen and (max-width: 990px) {
     #rna-contact-form .range-tab > li {
         width: 100%;
@@ -482,5 +515,25 @@
 
     #rna-contact-form .checkbox .form-check {
         width: 50%;
+    }
+
+    #rna-contact-form .vehicle-info {
+        flex-direction: column;
+    }
+
+    #rna-contact-form .vehicle-info .vehicle-column, #rna-contact-form .vehicle-info .concessionaire-column {
+        flex: 1 100%;
+    }
+
+    #rna-contact-form .vehicle-info .vehicle-column {
+        padding-right: 0px;
+    }
+
+    #rna-contact-form .vehicle-info .concessionaire-column {
+        padding-left: 0px;
+    }
+
+    #rna-contact-form .vehicle-info .vehicle-column img {
+        max-width: 280px;
     }
 }

@@ -12,6 +12,35 @@
                 <p v-html="Number(form.novo_vozilo) === 1 ? trans('messages.error.description_new_vehicle') : trans('messages.error.description_used_vehicle')"></p>
             </div>
 
+            <div v-if="!isSubmitting && !isSubmitted && !isError" class="vehicle-info">
+                <template v-if="!isVehicleInfoLoading && isVehicleInfoLoaded">
+                    <div class="vehicle-column">
+                        <h3 class="column-heading">Odabrano vozilo</h3>
+                        <img :src="vehicleThumbnailUrl" alt="">
+                        <h6>{{ vehicleInfo.name }}</h6>
+                        <p>
+                            {{ vehicleInfo.manufacture_year }}, {{ vehicleInfo.mileage }} km
+                            <br>
+                            {{ vehicleInfo.engine_capacity }} ccm, {{ vehicleInfo.engine_power }} kW ({{ vehicleInfo.engine_power_hp }} KS)
+                            <br>
+                            Mjenjač: {{ vehicleInfo.gearbox.naziv }}, {{ vehicleInfo.transmission.naziv }}
+                            <br>
+                            Boja: {{ vehicleInfo.exterior_color.naziv}}
+                        </p>
+                    </div>
+                    <div class="concessionaire-column">
+                        <h3 class="column-heading">Odabrani koncesionar</h3>
+                        <p>
+                            {{ vehicleInfo.location.naziv_tvrtke ? vehicleInfo.location.naziv_tvrtke : vehicleInfo.concessionaire.naziv }}
+                            <br>
+                            {{ vehicleInfo.concessionaire.adresa }}
+                            <br>
+                            {{ vehicleInfo.concessionaire.pb }} {{ vehicleInfo.concessionaire.grad }}
+                        </p>
+                    </div>
+                </template>
+            </div>
+
             <form v-if="!isSubmitting && !isSubmitted && !isError" method="post" class="customer-details-content" novalidate @change.passive="onFormChange" @submit.prevent="onSubmit">
                 <!-- Vrsta korisnika -->
                 <CustomerType
@@ -153,43 +182,35 @@ import LegalAccordion from "./components/LegalAccordion.vue";
 import './assets/css/fonts.css';
 import './assets/css/base.css';
 
-import i18nHr from "./lang/hr";
-
 export default {
     name: 'RnaContactForm',
 
     props: {
         brand: {
             type: String,
-            default: 'nissan',
-            required: true
+            default: 'nissan'
         },
 
         country: {
             type: String,
-            default: 'hr',
-            required: true
+            default: 'hr'
         },
 
         source: {
             type: String,
-            default: 'NV',
-            required: true
+            default: 'NV'
         },
 
         bir: {
-            type: [String, Number],
-            required: true
+            type: [String, Number]
         },
 
         vehicleId: {
-            type: [String, Number],
-            required: true
+            type: [String, Number]
         },
 
         newVehicle: {
-            type: Boolean,
-            default: false
+            type: Boolean
         }
     },
 
@@ -203,28 +224,35 @@ export default {
 
     created() {
 
+        this.setParams();
+
+        this.fetchVehicleInfo();
+
         if (this.isCountryValid()) {
-            if (this.country === "hr") {
-                this.i18n = i18nHr;
-            }
+            this.i18n = require(`./lang/${this.params.country}`).default;
         } else {
             throw `Unknown country ${this.country}`;
         }
-
-        this.form.odakle = this.source;
-        this.form.marka = this.brand;
-        this.form.rvBIR = Number(this.bir);
-        this.form.rvID = Number(this.vehicleId);
-        this.form.novo_vozilo = this.newVehicle;
 
         this.resolveEndpoints();
     },
 
     data() {
         return {
+            params: {
+                brand: 'nissan',
+                country: 'hr',
+                source: 'NV',
+                bir: null,
+                vehicleId: null,
+                newVehicle: false
+            },
+
             isSubmitting: false,
             isSubmitted: false,
             isError: false,
+            isVehicleInfoLoading: false,
+            isVehicleInfoLoaded: false,
 
             i18n: {},
             allowedCountries: ['hr', 'si', 'rs', 'ba', 'me'],
@@ -233,6 +261,10 @@ export default {
             gdprScreenshotEndpoint: null,
             submitEndpoint: null,
             screenshotTest: false,
+
+            vehicleInfo: {
+                name: null
+            },
 
             form: {
                 isVehicleLagerForm: false,
@@ -269,6 +301,15 @@ export default {
     },
 
     computed: {
+
+        vehicleThumbnailUrl() {
+            if (! this.params.vehicleId) {
+                return;
+            }
+
+            return `https://static.rabljena-vozila.com/${this.params.country}/rabljena_vozila/${this.params.vehicleId}/1/208557`;
+        },
+
         statusOptions() {
             return [
                 { id: 0, name: this.trans('fields.status.select') },
@@ -328,7 +369,48 @@ export default {
 
     methods: {
 
-        resolveEndpoints() {
+        setParams() {
+            if (window.RNA_CONTACT_FORM_SETTINGS) {
+                this.params.brand = window.RNA_CONTACT_FORM_SETTINGS.brand;
+                this.params.country = window.RNA_CONTACT_FORM_SETTINGS.country;
+                this.params.source = window.RNA_CONTACT_FORM_SETTINGS.source;
+                this.params.vehicleId = window.RNA_CONTACT_FORM_SETTINGS.vehicleId;
+            } else {
+                this.params.brand = this.brand;
+                this.params.country = this.country;
+                this.params.source = this.source;
+                this.params.vehicleId = this.vehicleId;
+            }
+
+            this.form.odakle = this.params.source;
+            this.form.marka = this.params.brand;
+        },
+
+        fetchVehicleInfo() {
+            if (! this.params.vehicleId) {
+                return;
+            }
+
+            this.isVehicleInfoLoading = true;
+
+            let endpoint = this.arvUrl() + `rest/rna-contact-form/vehicle/${this.params.vehicleId}`
+            axios.get(endpoint)
+                .then((response) => {
+                    this.isVehicleInfoLoading = false;
+                    this.isVehicleInfoLoaded = true;
+                    this.vehicleInfo = response.data;
+
+                    this.form.rvBIR = Number(response.data.concessionaire.bir);
+                    this.form.rvID = Number(response.data.id);
+                    this.form.novo_vozilo = response.data.new_vehicle;
+                })
+                .catch(() => {
+                    this.isVehicleInfoLoading = false;
+                    this.isVehicleInfoLoaded = false;
+                })
+        },
+
+        arvUrl(country) {
             let arvUrls = {
                 hr: "https://rabljena-vozila.renault.hr/",
                 si: "https://rabljena-vozila.renault.si/",
@@ -337,8 +419,12 @@ export default {
                 me: "https://upotrebljavana-vozila.renault.me/"
             }
 
-            this.gdprScreenshotEndpoint = arvUrls[this.country] + 'forms/screenshot_v3.php';
-            this.submitEndpoint = arvUrls[this.country] + 'forms/send-gdpr/rabljena_vozila/' + this.country + '/';
+            return arvUrls [country] || arvUrls [this.params.country];
+        },
+
+        resolveEndpoints() {
+            this.gdprScreenshotEndpoint = this.arvUrl() + 'forms/screenshot_v3.php';
+            this.submitEndpoint = this.arvUrl() + 'forms/send-gdpr/rabljena_vozila/' + this.country + '/';
         },
 
         isCountryValid() {
