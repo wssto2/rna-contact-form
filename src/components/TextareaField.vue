@@ -3,7 +3,7 @@
         <div :aria-required="required ? 'true' : 'false'" :class="['form-group', {'required': required}]">
             <label v-if="label" :for="name">{{ label }}</label>
             <div class="form-group-container">
-                <input :id="name" :name="name" :required="required" type="text" :class="[{'isInvalid': error}]" @input="$emit('input', $event.target.value)">
+                <textarea :id="name" :name="name" :required="required" :class="[{'isInvalid': error}]" @input="$emit('input', $event.target.value)"></textarea>
                 <template v-if="error">
                     <span class="error-message">{{ error }}</span>
                 </template>
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-    name: "TextField",
+    name: "TextareaField",
 
     props: {
         label: {

@@ -1,4 +1,8 @@
 export default {
+    selected_vehicle: "Odabrano vozilo",
+    selected_concessionaire: "Odabrani koncesionar",
+    gearbox: "Mjenjač",
+    exterior_color: "Boja",
     fields:  {
         customer_type: {
             physical: "Fizička osoba",
@@ -24,17 +28,24 @@ export default {
         gdpr_contact_email: "E-mail",
         gdpr_contact_sms: "SMS",
         gdpr_contact_telephone: "Telefon",
-        gdpr_contact_postal: "Obična pošta"
+        gdpr_contact_postal: "Obična pošta",
+        message: "Poruka"
     },
     gdpr_title: "Želim primati personalizirane ponude za kupnju vozila i postprodajnih proizvoda i usluga i informacije o personaliziranim pogodnostima i događajima kao i druge aktualne vijesti od Renault Nissan Hrvatska d.o.o., koja na hrvatskom tržištu zastupa marke Renault, Dacia, Nissan i od ovlaštenih distributera tih marki, kod kojih se nalaze moji podaci.",
     submit: "Pošalji",
     validator: {
-        required: "Molimo unesite :attr",
-        requiredcompany: "Molimo unsite naziv tvrtke",
-        email: "Provjerite jeste li unijeli ispravnu e-mail adresu",
-        in: "Molimo odaberite :attr",
-        requiredcontactchannel: "Molimo unesite svoj izbor",
-        requiredlegalinfo: "Molimo počitajte pravne obavijesti"
+        status: 'Molimo da odaberete svoj status.',
+        ime: 'Molimo da unesete svoje ime.',
+        prezime: 'Molimo da unesete svoje prezime.',
+        tvrtka: 'Molimo da unesete svoju tvrtku.',
+        email: 'Molimo da unesete svoj e-mail.',
+        ulica: 'Molimo da unesete svoju ulicu.',
+        kbr: 'Molimo da unesete svoj kućni broj.',
+        pb: 'Molimo da unesete svoj poštanski broj.',
+        mjesto: 'Molimo da unesete svoj grad.',
+        tel: 'Molimo da unesete svoj broj telefona.',
+        kontakt_kanal_email: 'Molimo da unesite svoj odabir.',
+        procitane_pravne_obavijesti: 'Molimo da pročitate pravne obavijesti.'
     },
     messages: {
         success: {

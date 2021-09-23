@@ -15,7 +15,7 @@
             <div v-if="!isSubmitting && !isSubmitted && !isError" class="vehicle-info">
                 <template v-if="!isVehicleInfoLoading && isVehicleInfoLoaded">
                     <div class="vehicle-column">
-                        <h3 class="column-heading">Odabrano vozilo</h3>
+                        <h3 class="column-heading">{{ trans('selected_vehicle') }}</h3>
                         <img :src="vehicleThumbnailUrl" alt="">
                         <h6>{{ vehicleInfo.name }}</h6>
                         <p>
@@ -23,13 +23,13 @@
                             <br>
                             {{ vehicleInfo.engine_capacity }} ccm, {{ vehicleInfo.engine_power }} kW ({{ vehicleInfo.engine_power_hp }} KS)
                             <br>
-                            Mjenjač: {{ vehicleInfo.gearbox.naziv }}, {{ vehicleInfo.transmission.naziv }}
+                            {{ trans('gearbox') }}: {{ vehicleInfo.gearbox.naziv }}, {{ vehicleInfo.transmission.naziv }}
                             <br>
-                            Boja: {{ vehicleInfo.exterior_color.naziv}}
+                            {{ trans('exterior_color') }}: {{ vehicleInfo.exterior_color.naziv}}
                         </p>
                     </div>
                     <div class="concessionaire-column">
-                        <h3 class="column-heading">Odabrani koncesionar</h3>
+                        <h3 class="column-heading">{{ trans('selected_concessionaire') }}</h3>
                         <p>
                             {{ vehicleInfo.location.naziv_tvrtke ? vehicleInfo.location.naziv_tvrtke : vehicleInfo.concessionaire.naziv }}
                             <br>
@@ -126,6 +126,13 @@
                     v-model="form.tel"
                     :error="getFieldError('tel')" />
 
+                <!-- Poruka -->
+                <TextareaField
+                    :label="trans('fields.message')"
+                    name="poruka"
+                    v-model="form.poruka"
+                    :error="getFieldError('poruka')" />
+
                 <!-- GDPR -->
                 <div class="gdpr section">
                     <p>{{ trans('gdpr_title') }}</p>
@@ -174,6 +181,7 @@
 <script>
 import axios from "axios";
 import TextField from "./components/TextField.vue";
+import TextareaField from "./components/TextareaField.vue";
 import SelectField from "./components/SelectField.vue";
 import GdprRadio from "./components/GdprRadio.vue";
 import CustomerType from "./components/CustomerType.vue";
@@ -219,7 +227,8 @@ export default {
         CustomerType,
         GdprRadio,
         SelectField,
-        TextField
+        TextField,
+        TextareaField
     },
 
     created() {
@@ -263,7 +272,10 @@ export default {
             screenshotTest: false,
 
             vehicleInfo: {
-                name: null
+                name: null,
+                thumbnail: {
+                    id: null
+                }
             },
 
             form: {
@@ -303,11 +315,11 @@ export default {
     computed: {
 
         vehicleThumbnailUrl() {
-            if (! this.params.vehicleId) {
+            if (! this.params.vehicleId || ! this.vehicleInfo.thumbnail || ! this.vehicleInfo.thumbnail.id) {
                 return;
             }
 
-            return `https://static.rabljena-vozila.com/${this.params.country}/rabljena_vozila/${this.params.vehicleId}/1/208557`;
+            return `https://static.rabljena-vozila.com/${this.params.country}/rabljena_vozila/${this.params.vehicleId}/1/${this.vehicleInfo.thumbnail.id}`;
         },
 
         statusOptions() {
@@ -321,18 +333,18 @@ export default {
 
         errorMessages() {
             return {
-                status: 'Molimo da odaberete svoj status.',
-                ime: 'Molimo da unesete svoje ime.',
-                prezime: 'Molimo da unesete svoje prezime.',
-                tvrtka: 'Molimo da unesete svoju tvrtku.',
-                email: 'Molimo da unesete svoj e-mail.',
-                ulica: 'Molimo da unesete svoju ulicu.',
-                kbr: 'Molimo da unesete svoj kućni broj.',
-                pb: 'Molimo da unesete svoj poštanski broj.',
-                mjesto: 'Molimo da unesete svoj grad.',
-                tel: 'Molimo da unesete svoj broj telefona.',
-                kontakt_kanal_email: 'Molimo da unesite svoj odabir.',
-                procitane_pravne_obavijesti: 'Molimo da pročitate pravne obavijesti.'
+                status: this.trans('validator.status'),
+                ime: this.trans('validator.ime'),
+                prezime: this.trans('validator.prezime'),
+                tvrtka: this.trans('validator.tvrtka'),
+                email: this.trans('validator.email'),
+                ulica: this.trans('validator.ulica'),
+                kbr: this.trans('validator.kbr'),
+                pb: this.trans('validator.pb'),
+                mjesto: this.trans('validator.mjesto'),
+                tel: this.trans('validator.tel'),
+                kontakt_kanal_email: this.trans('validator.kontakt_kanal_email'),
+                procitane_pravne_obavijesti: this.trans('validator.procitane_pravne_obavijesti')
             }
         },
 
