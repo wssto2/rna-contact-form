@@ -16,7 +16,19 @@
                 <template v-if="!isVehicleInfoLoading && isVehicleInfoLoaded">
                     <div class="vehicle-column">
                         <h3 class="column-heading">{{ trans('selected_vehicle') }}</h3>
-                        <img :src="vehicleThumbnailUrl" alt="">
+
+                        <div v-if="getVehicleInfo('has_three_sixty') === true" style="position:relative;">
+                            <div v-show="showCarouselPointer" class="threeSixtyPointer"></div>
+                            <vue-product-360
+                                style="cursor: pointer;"
+                                :images="threeSixtyImages"
+                                @starting="showCarouselPointer = false"
+                                @stopping="showCarouselPointer = true" />
+                        </div>
+                        <template v-else>
+                            <img v-if="getVehicleInfo('thumbnail')" :src="getVehicleInfo('thumbnail')" alt="">
+                        </template>
+
                         <h6>{{ getVehicleInfo('name') }}</h6>
                         <p>
                             {{ getVehicleInfo('manufacture_year') }}, {{ getVehicleInfo('mileage') }} km
@@ -187,6 +199,7 @@ import SelectField from "./components/SelectField.vue";
 import GdprRadio from "./components/GdprRadio.vue";
 import CustomerType from "./components/CustomerType.vue";
 import LegalAccordion from "./components/LegalAccordion.vue";
+import VueProduct360 from "@deviznet/vue-product-360";
 
 import './assets/css/fonts.css';
 import './assets/css/base.css';
@@ -229,7 +242,8 @@ export default {
         GdprRadio,
         SelectField,
         TextField,
-        TextareaField
+        TextareaField,
+        VueProduct360
     },
 
     created() {
@@ -271,6 +285,7 @@ export default {
             gdprScreenshotEndpoint: null,
             submitEndpoint: null,
             screenshotTest: false,
+            showCarouselPointer: true,
 
             vehicleInfo: {
                 name: null,
@@ -377,6 +392,14 @@ export default {
             }
 
             return requiredFields;
+        },
+
+        threeSixtyImages() {
+            if (! this.vehicleInfo || ! this.vehicleInfo.photos || typeof this.vehicleInfo.photos !== "object") {
+                return [];
+            }
+
+            return this.vehicleInfo.photos.map((p) => p.url);
         }
     },
 

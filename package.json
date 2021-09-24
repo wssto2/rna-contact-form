@@ -22,7 +22,7 @@
     "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/main.min.js"
   },
   "dependencies": {
-    "Validator": "^1.1.2",
+    "@deviznet/vue-product-360": "^1.0.3-beta",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
