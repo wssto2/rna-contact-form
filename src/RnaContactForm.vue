@@ -12,20 +12,20 @@
                 <p v-html="Number(form.novo_vozilo) === 1 ? trans('messages.error.description_new_vehicle') : trans('messages.error.description_used_vehicle')"></p>
             </div>
 
-            <div v-if="!isSubmitting && !isSubmitted && !isError" class="vehicle-info">
+            <div v-if="!isSubmitting && !isSubmitted && !isError && vehicleInfo" class="vehicle-info">
                 <template v-if="!isVehicleInfoLoading && isVehicleInfoLoaded">
                     <div class="vehicle-column">
                         <h3 class="column-heading">{{ trans('selected_vehicle') }}</h3>
                         <img :src="vehicleThumbnailUrl" alt="">
-                        <h6>{{ vehicleInfo.name }}</h6>
+                        <h6>{{ getVehicleInfo('name') }}</h6>
                         <p>
-                            {{ vehicleInfo.manufacture_year }}, {{ vehicleInfo.mileage }} km
+                            {{ getVehicleInfo('manufacture_year') }}, {{ getVehicleInfo('mileage') }} km
                             <br>
-                            {{ vehicleInfo.engine_capacity }} ccm, {{ vehicleInfo.engine_power }} kW ({{ vehicleInfo.engine_power_hp }} KS)
+                            {{ getVehicleInfo('engine_capacity') }} ccm, {{ getVehicleInfo('engine_power') }} kW ({{ getVehicleInfo('engine_power_hp') }} KS)
                             <br>
-                            {{ trans('gearbox') }}: {{ vehicleInfo.gearbox.naziv }}, {{ vehicleInfo.transmission.naziv }}
+                            {{ trans('gearbox') }}: {{ getVehicleInfo('gearbox.naziv') }}, {{ getVehicleInfo('transmission.naziv') }}
                             <br>
-                            {{ trans('exterior_color') }}: {{ vehicleInfo.exterior_color.naziv}}
+                            {{ trans('exterior_color') }}: {{ getVehicleInfo('exterior_color.naziv') }}
                         </p>
                     </div>
                     <div class="concessionaire-column">
@@ -180,6 +180,7 @@
 
 <script>
 import axios from "axios";
+import { getObjectValueByKey } from "@/utils/helpers";
 import TextField from "./components/TextField.vue";
 import TextareaField from "./components/TextareaField.vue";
 import SelectField from "./components/SelectField.vue";
@@ -396,6 +397,10 @@ export default {
 
             this.form.odakle = this.params.source;
             this.form.marka = this.params.brand;
+        },
+
+        getVehicleInfo(key, fallback) {
+            return getObjectValueByKey(this.vehicleInfo, key, fallback);
         },
 
         fetchVehicleInfo() {
