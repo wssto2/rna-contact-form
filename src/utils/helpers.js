@@ -19,6 +19,10 @@ export function getObjectValueByKey(obj, key, fallback)
         for (let partIndex in parts) {
             let part = parts [partIndex];
 
+            if (!obj || typeof obj !== "object") {
+                return fallback;
+            }
+
             if (Object.prototype.hasOwnProperty.call(obj, part)) {
                 obj = obj [part];
             } else {
