@@ -180,7 +180,7 @@
 
 <script>
 import axios from "axios";
-import { getObjectValueByKey } from "@/utils/helpers";
+import { getObjectValueByKey } from "./utils/helpers";
 import TextField from "./components/TextField.vue";
 import TextareaField from "./components/TextareaField.vue";
 import SelectField from "./components/SelectField.vue";
