@@ -31,11 +31,10 @@
 
                         <h6>{{ getVehicleInfo('name') }}</h6>
                         <p>
-                            {{ getVehicleInfo('manufacture_year') }}, {{ getVehicleInfo('mileage') }} km
+                            <span v-if="Number(form.novo_vozilo) !== 1">{{ getVehicleInfo('manufacture_year') }}, {{ getVehicleInfo('mileage') }} km<br></span>
+                            {{ getVehicleInfo('engine_capacity') }} ccm, {{ getVehicleInfo('engine_power') }} kW
                             <br>
-                            {{ getVehicleInfo('engine_capacity') }} ccm, {{ getVehicleInfo('engine_power') }} kW ({{ getVehicleInfo('engine_power_hp') }} KS)
-                            <br>
-                            {{ trans('gearbox') }}: {{ getVehicleInfo('gearbox.naziv') }}, {{ getVehicleInfo('transmission.naziv') }}
+                            {{ trans('gearbox') }}: {{ getVehicleInfo('gearbox.naziv') }}<span v-if="getVehicleInfo('transmission.naziv')">, {{ getVehicleInfo('transmission.naziv') }}</span>
                             <br>
                             {{ trans('exterior_color') }}: {{ getVehicleInfo('exterior_color.naziv') }}
                         </p>
