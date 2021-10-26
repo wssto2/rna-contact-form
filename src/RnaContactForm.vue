@@ -178,6 +178,9 @@
                 </div>
 
                 <LegalAccordion
+                    :title="trans('legal_disclaimer_title')"
+                    :content="trans('legal_disclaimer_content')"
+                    :hint="trans('legal_disclaimer_hint')"
                     v-model="form.procitane_pravne_obavijesti"
                     :error="getFieldError('procitane_pravne_obavijesti')" />
 
