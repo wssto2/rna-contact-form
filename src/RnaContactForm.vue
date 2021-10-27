@@ -421,13 +421,13 @@ export default {
 
             switch (this.params.brand) {
                 case 'renault':
-                    import('./assets/css/renault_fonts.css');
+                    require('./assets/css/renault_fonts.css');
                 break;
                 case 'dacia':
-                    import('./assets/css/dacia_fonts.css');
+                    require('./assets/css/dacia_fonts.css');
                 break;
                 case 'nissan':
-                    import('./assets/css/nissan_fonts.css');
+                    require('./assets/css/nissan_fonts.css');
                 break;
             }
 
