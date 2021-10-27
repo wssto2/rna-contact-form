@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="legal-info-component">
+        <div :class="['legal-info-component', {'expanded': expanded}]">
             <div class="legal-info-label" @click="onToggle">{{ title }}</div>
             <div class="legal-info-text-content" v-show="expanded" v-html="content"></div>
         </div>

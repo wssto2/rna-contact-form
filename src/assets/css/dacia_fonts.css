@@ -1,0 +1,43 @@
+/*@font-face {
+    font-family: 'Dacia';
+    src: url("../fonts/DaciaSpirit-Light_V1200.eot");
+    src: url("../fonts/DaciaSpirit-Light_V1200.eot?#iefix") format("embedded-opentype"), url("../fonts/DaciaSpirit-Light_V1200.woff2") format("woff2"), url("../fonts/DaciaSpirit-Light_V1200.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Dacia';
+    src: url("../fonts/DaciaSpirit-Regular_V1200.eot");
+    src: url("../fonts/DaciaSpirit-Regular_V1200.eot?#iefix") format("embedded-opentype"), url("../fonts/DaciaSpirit-Regular_V1200.woff2") format("woff2"), url("../fonts/DaciaSpirit-Regular_V1200.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Dacia';
+    src: url("../fonts/DaciaSpirit-Bold_V1200.eot");
+    src: url("../fonts/DaciaSpirit-Bold_V1200.eot?#iefix") format("embedded-opentype"), url("../fonts/DaciaSpirit-Bold_V1200.woff2") format("woff2"), url("../fonts/DaciaSpirit-Bold_V1200.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+}*/
+
+
+@font-face {
+    font-family: "Dacia";
+    font-weight: 400;
+    font-display: swap;
+    src: url(../fonts/DaciaSpirit-Light.woff2) format("woff2"), url(../fonts/DaciaSpirit-Light.woff) format("woff"); }
+
+@font-face {
+    font-family: "Dacia";
+    font-weight: 600;
+    font-display: swap;
+    src: url(../fonts/DaciaSpirit-Bold.woff2) format("woff2"), url(../fonts/DaciaSpirit-Bold.woff) format("woff"); }
+
+@font-face {
+    font-family: icon-Dacia-Global;
+    src: url(../fonts/icons/Dacia-Global.woff2) format("woff2"),url(../fonts/icons/Dacia-Global.woff) format("woff"),url(../fonts/icons/Dacia-Global.ttf) format("truetype");
+    font-weight: 400;
+    font-style: normal
+}

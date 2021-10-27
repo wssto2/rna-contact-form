@@ -8,11 +8,32 @@
 
 #rna-contact-form {
     color: #343434;
-    font-family: Nissan,Verdana,Arial,sans-serif;
+    font-family: Verdana, Arial, sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     font-size: 14px;
     line-height: 22px;
+}
+
+#rna-contact-form.renault {
+    color: #000;
+    font-family: NouvelR, Verdana, Arial, sans-serif;
+    font-size: 10px;
+    line-height: 1.45;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+#rna-contact-form.dacia {
+    color: #606164;
+    font-family: Dacia, Verdana, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#rna-contact-form.nissan {
+    color: #343434;
+    font-family: Nissan, Verdana, Arial, sans-serif;
 }
 
 #rna-contact-form p {
@@ -36,16 +57,33 @@
 
 #rna-contact-form .form-group label {
     display: block;
-    font-family: "Nissan", Verdana,Arial,sans-serif;
     font-size: .8571428571em;
     margin-bottom: .6666666667em;
-    text-transform: uppercase;
     font-weight: 600;
     margin-top: 2.8571428571em;
 }
 
+#rna-contact-form:not(.renault) .form-group input + label {
+    display: none;
+}
+
+#rna-contact-form.nissan .form-group label {
+    font-family: "Nissan", Verdana,Arial,sans-serif;
+    font-size: .8571428571em;
+    text-transform: uppercase;
+}
+
+#rna-contact-form.dacia .form-group label {
+    text-transform: none;
+    font-size: 16px;
+    font-family: 'Dacia';
+}
+
 #rna-contact-form .form-group.required label:after {
     content: "*";
+}
+
+#rna-contact-form.nissan .form-group.required label:after {
     color: #c3002f;
 }
 
@@ -71,22 +109,72 @@
     font-family: Verdana,Arial,sans-serif;
 }
 
-#rna-contact-form .form-group .custom-selectbox .selectedValue,
-#rna-contact-form .form-group input[type=color],
-#rna-contact-form .form-group input[type=date],
-#rna-contact-form .form-group input[type=datetime-local],
-#rna-contact-form .form-group input[type=datetime],
-#rna-contact-form .form-group input[type=email],
-#rna-contact-form .form-group input[type=month],
-#rna-contact-form .form-group input[type=number],
-#rna-contact-form .form-group input[type=password],
-#rna-contact-form .form-group input[type=search],
-#rna-contact-form .form-group input[type=tel],
-#rna-contact-form .form-group input[type=text],
-#rna-contact-form .form-group input[type=time],
-#rna-contact-form .form-group input[type=url],
-#rna-contact-form .form-group input[type=week],
-#rna-contact-form .form-group textarea {
+#rna-contact-form.dacia .form-group .custom-selectbox .selectedValue,
+#rna-contact-form.dacia .form-group input[type=color],
+#rna-contact-form.dacia .form-group input[type=date],
+#rna-contact-form.dacia .form-group input[type=datetime-local],
+#rna-contact-form.dacia .form-group input[type=datetime],
+#rna-contact-form.dacia .form-group input[type=email],
+#rna-contact-form.dacia .form-group input[type=month],
+#rna-contact-form.dacia .form-group input[type=number],
+#rna-contact-form.dacia .form-group input[type=password],
+#rna-contact-form.dacia .form-group input[type=search],
+#rna-contact-form.dacia .form-group input[type=tel],
+#rna-contact-form.dacia .form-group input[type=text],
+#rna-contact-form.dacia .form-group input[type=time],
+#rna-contact-form.dacia .form-group input[type=url],
+#rna-contact-form.dacia .form-group input[type=week],
+#rna-contact-form.dacia .form-group textarea {
+    color: #606164;
+    font-family: "Dacia",Verdana,Arial,sans-serif;
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    border: 1px solid #c5c5c5;
+    border-radius: .1666666667em;
+    line-height: normal;
+    padding: 11px 9px 10px 9px;
+    background-color: #FFF;
+    -webkit-appearance: none;
+}
+
+#rna-contact-form.dacia .form-group input[type=color]:focus,
+#rna-contact-form.dacia .form-group input[type=date]:focus,
+#rna-contact-form.dacia .form-group input[type=datetime-local]:focus,
+#rna-contact-form.dacia .form-group input[type=datetime]:focus,
+#rna-contact-form.dacia .form-group input[type=email]:focus,
+#rna-contact-form.dacia .form-group input[type=month]:focus,
+#rna-contact-form.dacia .form-group input[type=number]:focus,
+#rna-contact-form.dacia .form-group input[type=password]:focus,
+#rna-contact-form.dacia .form-group input[type=search]:focus,
+#rna-contact-form.dacia .form-group input[type=tel]:focus,
+#rna-contact-form.dacia .form-group input[type=text]:focus,
+#rna-contact-form.dacia .form-group input[type=time]:focus,
+#rna-contact-form.dacia .form-group input[type=url]:focus,
+#rna-contact-form.dacia .form-group input[type=week]:focus,
+#rna-contact-form.dacia .form-group textarea:focus {
+    border: 1px solid #5bb4e3;
+    outline: 0;
+    background-color: #eff5f8;
+    box-shadow: none;
+}
+
+#rna-contact-form.nissan .form-group .custom-selectbox .selectedValue,
+#rna-contact-form.nissan .form-group input[type=color],
+#rna-contact-form.nissan .form-group input[type=date],
+#rna-contact-form.nissan .form-group input[type=datetime-local],
+#rna-contact-form.nissan .form-group input[type=datetime],
+#rna-contact-form.nissan .form-group input[type=email],
+#rna-contact-form.nissan .form-group input[type=month],
+#rna-contact-form.nissan .form-group input[type=number],
+#rna-contact-form.nissan .form-group input[type=password],
+#rna-contact-form.nissan .form-group input[type=search],
+#rna-contact-form.nissan .form-group input[type=tel],
+#rna-contact-form.nissan .form-group input[type=text],
+#rna-contact-form.nissan .form-group input[type=time],
+#rna-contact-form.nissan .form-group input[type=url],
+#rna-contact-form.nissan .form-group input[type=week],
+#rna-contact-form.nissan .form-group textarea {
     color: #000;
     font-family: "Nissan",Verdana,Arial,sans-serif;
     font-size: 1.2857142857em;
@@ -102,11 +190,20 @@
     background-color: #FFF;
 }
 
-#rna-contact-form .isInvalid {
+#rna-contact-form.dacia .isInvalid,
+#rna-contact-form.nissan .isInvalid {
     border: 2px solid red!important;
 }
 
-#rna-contact-form .error-message {
+#rna-contact-form.renault .error-message {
+    display: block;
+    color: #e91630;
+    width: 100%;
+    font-size: 13px;
+}
+
+#rna-contact-form.dacia .error-message,
+#rna-contact-form.nissan .error-message {
     display: block;
     color: red;
     width: 100%;
@@ -165,7 +262,33 @@
     position: relative;
 }
 
-#rna-contact-form .custom-selectbox .selectedValue:after {
+#rna-contact-form.dacia .custom-selectbox .selectedValue:after {
+    content: "";
+    position: absolute;
+    font-size: 1.1428571429rem;
+    border-left: 1px solid #606164;
+    padding-left: 0.7142857143em;
+    padding-right: 0.7142857143em;
+    color: #606164;
+    line-height: 1.875;
+    right: 0;
+    font-family: icon-Dacia-Global;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#rna-contact-form.nissan .custom-selectbox .selectedValue:after {
     content: "\E618";
     position: absolute;
     font-family: "icon-Nissan-Global";
@@ -206,12 +329,21 @@
     font-size: 15px;
 }
 
+#rna-contact-form.renault .form-check-label p {
+    font-size: 14px;
+    margin: 16px 0;
+}
+
 #rna-contact-form .checkbox.section.form-group {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
+}
+
+#rna-contact-form.renault .checkbox.section.form-group {
+    margin-bottom: 0px;
 }
 
 #rna-contact-form .checkbox .form-check {
@@ -231,6 +363,10 @@
     position: relative;
 }
 
+#rna-contact-form.renault .checkbox .form-check {
+    padding-left: 38px;
+}
+
 #rna-contact-form .checkbox .form-check-label {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -243,7 +379,54 @@
     text-transform: uppercase;
 }
 
-#rna-contact-form .checkbox label:before {
+#rna-contact-form.renault .checkbox .form-check-label {
+    cursor: inherit;
+}
+
+#rna-contact-form.renault .checkbox .form-check-label {
+    font-size: 14px;
+    text-transform: none;
+    font-weight: normal;
+}
+
+#rna-contact-form.renault .checkbox label:before {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    content: "";
+    left: 0;
+    display: inline-block;
+    border: 1px solid #d9d9d6;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+}
+
+#rna-contact-form.dacia .checkbox label:before {
+    font-family: icon-Dacia-Global;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border: 1px solid #c5c5c5;
+    border-radius: .2142857143em;
+    box-shadow: none;
+    background-color: #fff;
+    color: transparent;
+    content: "";
+    font-size: 17px;
+    left: 0;
+    padding: .1666666667em;
+    position: absolute;
+    top: 0;
+    font-size: 17px;
+}
+
+#rna-contact-form.nissan .checkbox label:before {
     font-family: icon-Nissan-Global;
     speak: none;
     font-style: normal;
@@ -286,13 +469,35 @@
     width: 23px;
 }
 
-#rna-contact-form .checkbox .gdpr-radio-button:after {
+#rna-contact-form.renault .checkbox .gdpr-radio-button:after {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    content: "";
+    left: 0;
+    display: inline-block;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    margin-top: -1px;
+    margin-left: 5px;
+    background-color: #000;
+    display: none;
+}
+
+#rna-contact-form.dacia .checkbox .gdpr-radio-button:after,
+#rna-contact-form.nissan .checkbox .gdpr-radio-button:after {
     content: "X";
     position: absolute;
     display: none;
 }
 
-#rna-contact-form .checkbox .form-check input:checked ~ .gdpr-radio-button:after {
+#rna-contact-form.renault .checkbox .form-check input:checked ~ .gdpr-radio-button:after {
+    display: block;
+}
+
+#rna-contact-form.dacia .checkbox .form-check input:checked ~ .gdpr-radio-button:after,
+#rna-contact-form.nissan .checkbox .form-check input:checked ~ .gdpr-radio-button:after {
     display: block;
     left: 7px;
     top: 0px;
@@ -337,11 +542,19 @@
     content: "";
     width: 92%;
     margin: 0 4%;
-    background-color: #c3002f;
+    background-color: #fc3;
     height: 3px;
     position: absolute;
     bottom: 0;
     left: 0;
+}
+
+#rna-contact-form.dacia .range-tab > li.active::after {
+    background-color: #0073ac;
+}
+
+#rna-contact-form.nissan .range-tab > li.active::after {
+    background-color: #c3002f;
 }
 
 #rna-contact-form .range-tab > li:last-child {
@@ -363,7 +576,63 @@
     font-size: 16px;
 }
 
-#rna-contact-form .legal-info-component .legal-info-label:after {
+#rna-contact-form.renault .legal-info-component .legal-info-label {
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#rna-contact-form.renault .legal-info-component .legal-info-label::before,
+#rna-contact-form.renault .legal-info-component .legal-info-label::after {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    content: "";
+    width: 10px;
+    height: 2px;
+    background-color: #000;
+    transition: transform .5s;
+}
+
+#rna-contact-form.renault .legal-info-component .legal-info-label::before {
+    transform: translateY(-50%) rotate(45deg);
+    right: 22px;
+}
+
+#rna-contact-form.renault .legal-info-component .legal-info-label::after {
+    transform: translateY(-50%) rotate(-45deg);
+    right: 16px;
+}
+
+#rna-contact-form.renault .legal-info-component.expanded .legal-info-label::before {
+    transform: translateY(-50%) rotate(-45deg);
+    right: 22px;
+}
+
+#rna-contact-form.renault .legal-info-component.expanded .legal-info-label::after {
+    transform: translateY(-50%) rotate(45deg);
+    right: 16px;
+}
+
+#rna-contact-form.dacia .legal-info-component .legal-info-label:after {
+    content: "\E618";
+    position: absolute;
+    font-family: "icon-Dacia-Global";
+    padding: .7142857143em;
+    color: #606164;
+    right: 0;
+    top: 0!important;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+}
+
+#rna-contact-form.dacia .legal-info-component .legal-info-label:after {
+    font-family: "icon-Dacia-Global";
+    content: "\E610";
+    color: #606164;
+}
+
+#rna-contact-form.nissan .legal-info-component .legal-info-label:after {
     content: "\E618";
     position: absolute;
     font-family: "icon-Nissan-Global";
@@ -375,7 +644,7 @@
     transition: all .5s;
 }
 
-#rna-contact-form .legal-info-component .legal-info-label:after {
+#rna-contact-form.nissan .legal-info-component .legal-info-label:after {
     font-family: "icon-Nissan-Global";
     content: "\E610";
     color: #c3002f;
@@ -398,7 +667,89 @@
     position: relative;
 }
 
-#rna-contact-form .submit-form-button {
+#rna-contact-form.renault .submit-form-button {
+    -webkit-appearance: button;
+    padding: 16px 32px;
+    font-size: 14px;
+    position: relative;
+    display: block;
+    font-weight: 700;
+    text-align: center;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1.15;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #000;
+    background: linear-gradient(90deg,#ffda66 50%,#ffce33 0);
+    background-size: 200% 100%;
+    background-position: 100% 100%;
+    transition: background-position .3s;
+    text-transform: uppercase;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#rna-contact-form.renault .submit-form-button:hover {
+    background-position: 0 100%;
+}
+
+#rna-contact-form.dacia .submit-form-button {
+    display: block;
+    margin-top: 50px;
+    width: auto;
+    font-size: 1em;
+    text-decoration: none;
+    letter-spacing: .0357142857em;
+    text-transform: uppercase;
+    position: relative;
+    -webkit-appearance: button;
+    cursor: pointer;
+    font-family: inherit;
+    margin-left: auto;
+    margin-right: auto;
+    background: #646b52;
+    color: #fff;
+    padding: .7857142857em 30px;
+    line-height: 1.3;
+    border: 2px solid #646b52;
+    text-align: center;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    padding-right: 50px;
+}
+
+#rna-contact-form.dacia .submit-form-button:hover,
+#rna-contact-form.dacia .submit-form-button:focus {
+    background: black !important;
+    border: 2px solid black !important;
+}
+
+#rna-contact-form.dacia .submit-form-button:after {
+    content: "";
+    color: #FFF;
+    font-size: .7857142857rem;
+    right: 20px;
+    top: 50%;
+    margin-top: -.5em;
+    position: absolute;
+    font-family: "icon-Dacia-Global";
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#rna-contact-form.nissan .submit-form-button {
     display: block;
     margin-top: 50px;
     padding: .8571428571em 45px .8571428571em 20px;
@@ -418,13 +769,13 @@
     font-family: inherit;
 }
 
-#rna-contact-form .submit-form-button:hover,
-#rna-contact-form .submit-form-button:focus {
+#rna-contact-form.nissan .submit-form-button:hover,
+#rna-contact-form.nissan .submit-form-button:focus {
     background: #920023;
     border-color: #920023;
 }
 
-#rna-contact-form .submit-form-button:after {
+#rna-contact-form.nissan .submit-form-button:after {
     content: "";
     color: #FFF;
     font-size: .7857142857rem;
@@ -525,6 +876,176 @@
 
 #rna-contact-form .custom-selectbox select option {
     font-family: inherit;
+}
+
+#rna-contact-form.renault .form-group {
+    position: relative;
+    margin-bottom: 32px;
+}
+
+#rna-contact-form.renault .form-group input,
+#rna-contact-form.renault .form-group textarea {
+    display: block;
+    width: 100%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 16px 8px;
+    border: 1px solid #d9d9d6;
+    margin: 0;
+    font-family: "NouvelR";
+    font-size: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: border-color .5s;
+    border-width: 0 0 1px;
+    padding: 16px 8px 8px 0px;
+    transition: border .5s;
+}
+
+#rna-contact-form.renault .form-group input:focus,
+#rna-contact-form.renault .form-group textarea:focus {
+    color: #3e3f40;
+    border-color: #3e3f40;
+    outline: 0;
+}
+
+#rna-contact-form.renault .form-group > label {
+    display: none;
+}
+
+#rna-contact-form.renault .form-group input + label,
+#rna-contact-form.renault .form-group textarea + label {
+    position: absolute;
+    top: 4px;
+    color: #656666;
+    cursor: text;
+    transition: all .5s;
+    z-index: 1;
+    margin: 0px;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+#rna-contact-form.renault .form-group input:focus + label,
+#rna-contact-form.renault .form-group input:not(:placeholder-shown) + label,
+#rna-contact-form.renault .form-group textarea:focus + label,
+#rna-contact-form.renault .form-group textarea:not(:placeholder-shown) + label{
+    top: -8px;
+    font-size: 13px;
+    color: #3e3f40;
+    border-color: #3e3f40;
+}
+
+#rna-contact-form.renault .form-group input.isInvalid,
+#rna-contact-form.renault .form-group textarea.isInvalid{
+    border-color: #e91630;
+}
+
+#rna-contact-form.renault .gdpr.section p {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#rna-contact-form.renault .custom-selectbox .selectedValue {
+    display: inline-block;
+    width: 100%;
+    padding: 8px 24px 8px 8px;
+    border: 1px solid rgb(217, 217, 214);
+    border-radius: 0px;
+    margin: 0px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-family: "NouvelR";
+    font-size: 16px;
+    cursor: pointer;
+    background-image: none;
+    appearance: none;
+    outline: none;
+}
+
+#rna-contact-form.renault .custom-selectbox .selectedValue::after {
+    content: "";
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    right: 8px;
+    width: 0px;
+    height: 0px;
+    border-top: 8px solid;
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+    pointer-events: none;
+}
+
+#rna-contact-form.renault .menu-wrap .range-tab {
+    display: none;
+}
+
+#rna-contact-form:not(.renault) .menu-wrap .renault-switch {
+    display: none;
+}
+
+#rna-contact-form.renault .menu-wrap .renault-switch {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#rna-contact-form.renault .menu-wrap .renault-switch .ToggleButton {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 32px;
+    user-select: none;
+}
+
+#rna-contact-form.renault .menu-wrap .renault-switch .ToggleButton__checkbox {
+    display: none;
+}
+
+#rna-contact-form.renault .menu-wrap .renault-switch .ToggleButton__slider {
+    position: absolute;
+    inset: 0px;
+    border-radius: 32px;
+    background-color: rgb(217, 217, 214);
+    transition: all 0.4s ease 0s;
+}
+
+#rna-contact-form.renault .menu-wrap .renault-switch .ToggleButton__slider::before {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: rgb(242, 242, 242);
+    transition: all 0.4s ease 0s;
+}
+
+#rna-contact-form.renault .menu-wrap .renault-switch .ToggleButton__switch {
+    position: absolute;
+    inset: 0px;
+    width: 60px;
+    height: 32px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#rna-contact-form.renault .menu-wrap .renault-switch .ToggleButton__switch:not(.is-disabled) {
+    cursor: pointer;
+}
+
+#rna-contact-form.renault .menu-wrap .renault-switch .ToggleButton__checkbox:checked + .ToggleButton__slider {
+    background-color: rgb(239, 223, 0);
+}
+
+#rna-contact-form.renault .menu-wrap .renault-switch .ToggleButton__checkbox:checked + .ToggleButton__slider::before {
+    transform: translateX(26px);
 }
 
 @media screen and (max-width: 990px) {

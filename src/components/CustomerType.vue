@@ -8,6 +8,15 @@
                 <span class="tab-text">{{ legalLabel }}</span>
             </li>
         </ul>
+
+        <div class="renault-switch">
+            <label for="client-type">{{ legalLabel }}</label>
+            <div class="ToggleButton">
+                <input type="checkbox" class="ToggleButton__checkbox" id="client-type" value="0" @change="onSwitchChange">
+                <div class="ToggleButton__slider ToggleButton__round"></div>
+                <label class="ToggleButton__switch" for="client-type"></label>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -22,6 +31,13 @@ export default {
         legalLabel: String,
 
         value: [String, Number]
+    },
+
+    methods: {
+        onSwitchChange(e) {
+            let checked = e.target.checked;
+            this.$emit('input', checked ? 1 : 0);
+        }
     }
 }
 </script>

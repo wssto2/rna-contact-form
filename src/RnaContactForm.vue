@@ -1,5 +1,5 @@
 <template>
-    <div id="rna-contact-form" :class="[brand]">
+    <div id="rna-contact-form" :class="[params.brand]">
         <div class="c_056">
 
             <div v-if="!isSubmitting && !isError && isSubmitted" class="customer-details-content c_056_1">
@@ -179,7 +179,7 @@
 
                 <LegalAccordion
                     :title="trans('legal_disclaimer_title')"
-                    :content="trans('legal_disclaimer_content')"
+                    :content="trans('legal_disclaimer_content_' + params.brand)"
                     :hint="trans('legal_disclaimer_hint')"
                     v-model="form.procitane_pravne_obavijesti"
                     :error="getFieldError('procitane_pravne_obavijesti')" />
@@ -203,7 +203,6 @@ import CustomerType from "./components/CustomerType.vue";
 import LegalAccordion from "./components/LegalAccordion.vue";
 import VueProduct360 from "@deviznet/vue-product-360";
 
-import './assets/css/fonts.css';
 import './assets/css/base.css';
 
 export default {
@@ -419,6 +418,19 @@ export default {
                 this.params.source = this.source;
                 this.params.vehicleId = this.vehicleId;
             }
+
+            switch (this.params.brand) {
+                case 'renault':
+                    import('./assets/css/renault_fonts.css');
+                break;
+                case 'dacia':
+                    import('./assets/css/dacia_fonts.css');
+                break;
+                case 'nissan':
+                    import('./assets/css/nissan_fonts.css');
+                break;
+            }
+
 
             this.form.odakle = this.params.source;
             this.form.marka = this.params.brand;

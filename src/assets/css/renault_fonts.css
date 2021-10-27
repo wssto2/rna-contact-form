@@ -1,0 +1,15 @@
+@font-face {
+    font-family: "NouvelR";
+    font-weight: 400;
+    font-display: swap;
+    src: url(../fonts/NouvelR-Regular.woff2) format("woff2"),url(../fonts/NouvelR-Regular.woff) format("woff");
+    unicode-range: u+000-20cf
+}
+
+@font-face {
+    font-family: "NouvelR";
+    font-weight: 700;
+    font-display: swap;
+    src: url(../fonts/NouvelR-Bold.woff2) format("woff2"),url(../fonts/NouvelR-Bold.woff) format("woff");
+    unicode-range: u+000-20cf
+}
