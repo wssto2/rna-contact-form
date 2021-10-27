@@ -13,6 +13,7 @@
     -webkit-text-size-adjust: 100%;
     font-size: 14px;
     line-height: 22px;
+    padding-top: 30px;
 }
 
 #rna-contact-form.renault {
@@ -474,15 +475,14 @@
     transform: translateY(-50%);
     top: 50%;
     content: "";
-    left: 0;
+    left: 50%;
     display: inline-block;
     border-radius: 50%;
     width: 14px;
     height: 14px;
-    margin-top: -1px;
-    margin-left: 5px;
     background-color: #000;
     display: none;
+    transform: translate3d(-50%, -50%, 0);
 }
 
 #rna-contact-form.dacia .checkbox .gdpr-radio-button:after,
@@ -572,7 +572,7 @@
 
 #rna-contact-form .legal-info-component .legal-info-label {
     cursor: pointer;
-    padding-right: 1.1em;
+    padding-right: 50px;
     font-size: 16px;
 }
 
