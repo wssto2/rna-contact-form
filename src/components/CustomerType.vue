@@ -10,7 +10,7 @@
         </ul>
 
         <div class="renault-switch">
-            <label for="client-type">{{ legalLabel }}</label>
+            <label for="client-type">{{ legalLabelRenault || legalLabel }}</label>
             <div class="ToggleButton">
                 <input type="checkbox" class="ToggleButton__checkbox" id="client-type" value="0" @change="onSwitchChange">
                 <div class="ToggleButton__slider ToggleButton__round"></div>
@@ -29,6 +29,8 @@ export default {
         physicalLabel: String,
 
         legalLabel: String,
+
+        legalLabelRenault: String,
 
         value: [String, Number]
     },

@@ -57,6 +57,7 @@
                 <CustomerType
                     :physical-label="trans('fields.customer_type.physical')"
                     :legal-label="trans('fields.customer_type.legal')"
+                    :legal-label-renault="trans('fields.customer_type.legal_renault')"
                     v-model="form.pravna_osoba" />
 
                 <!-- Titula korisnika -->
@@ -146,7 +147,7 @@
 
                 <!-- GDPR -->
                 <div class="gdpr section">
-                    <p>{{ trans('gdpr_title') }}</p>
+                    <p v-html="trans('gdpr_title')"></p>
 
                     <!-- GDPR: Email -->
                     <GdprRadio
