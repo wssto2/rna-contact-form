@@ -2,17 +2,24 @@
     <div id="rna-contact-form" :class="[params.brand]">
         <div class="c_056">
 
-            <div v-if="!isSubmitting && !isError && isSubmitted" class="customer-details-content c_056_1">
+            <div v-if="!isVehicleInfoError && isVehicleInfoLoading" class="loader"></div>
+
+            <div v-if="isVehicleInfoError" class="customer-details-content c_056_1">
+                <h2>{{ trans('messages.vehicle_not_found.title') }}</h2>
+                <p v-html="trans('messages.vehicle_not_found.description')"></p>
+            </div>
+
+            <div v-if="!isVehicleInfoError && !isSubmitting && !isError && isSubmitted" class="customer-details-content c_056_1">
                 <h2>{{ Number(form.novo_vozilo) === 1 ? trans('messages.success.title_new_vehicle') : trans('messages.success.title_used_vehicle') }}</h2>
                 <p v-html="Number(form.novo_vozilo) === 1 ? trans('messages.success.description_new_vehicle') : trans('messages.success.description_used_vehicle')"></p>
             </div>
 
-            <div v-if="!isSubmitting && isError" class="customer-details-content c_056_1">
+            <div v-if="!isVehicleInfoError && !isSubmitting && isError" class="customer-details-content c_056_1">
                 <h2>{{ Number(form.novo_vozilo) === 1 ? trans('messages.error.title_new_vehicle') : trans('messages.error.title_used_vehicle') }}</h2>
                 <p v-html="Number(form.novo_vozilo) === 1 ? trans('messages.error.description_new_vehicle') : trans('messages.error.description_used_vehicle')"></p>
             </div>
 
-            <div v-if="!isSubmitting && !isSubmitted && !isError && vehicleInfo" class="vehicle-info">
+            <div v-if="!isVehicleInfoError && !isSubmitting && !isSubmitted && !isError && vehicleInfo" class="vehicle-info">
                 <template v-if="!isVehicleInfoLoading && isVehicleInfoLoaded">
                     <div class="vehicle-column">
                         <h3 class="column-heading">{{ trans('selected_vehicle') }}</h3>
@@ -36,7 +43,7 @@
                             <br>
                             {{ trans('gearbox') }}: {{ getVehicleInfo('gearbox.naziv') }}<span v-if="getVehicleInfo('transmission.naziv')">, {{ getVehicleInfo('transmission.naziv') }}</span>
                             <br>
-                            {{ trans('exterior_color') }}: {{ getVehicleInfo('exterior_color.naziv') }}
+                            {{ trans('exterior_color') }}: {{ getVehicleInfo('exterior_color') }}
                         </p>
                     </div>
                     <div class="concessionaire-column">
@@ -52,7 +59,7 @@
                 </template>
             </div>
 
-            <form v-if="!isSubmitting && !isSubmitted && !isError" method="post" class="customer-details-content" novalidate @change.passive="onFormChange" @submit.prevent="onSubmit">
+            <form v-if="!isVehicleInfoError && !isVehicleInfoLoading && !isSubmitting && !isSubmitted && !isError" method="post" class="customer-details-content" novalidate @change.passive="onFormChange" @submit.prevent="onSubmit">
                 <!-- Vrsta korisnika -->
                 <CustomerType
                     :physical-label="trans('fields.customer_type.physical')"
@@ -279,6 +286,7 @@ export default {
             isError: false,
             isVehicleInfoLoading: false,
             isVehicleInfoLoaded: false,
+            isVehicleInfoError: false,
 
             i18n: {},
             allowedCountries: ['hr', 'si', 'rs', 'ba', 'me'],
@@ -446,13 +454,17 @@ export default {
                 return;
             }
 
+            this.isVehicleInfoLoaded = false;
             this.isVehicleInfoLoading = true;
+            this.isVehicleInfoError = false;
 
             let endpoint = this.arvUrl() + `rest/rna-contact-form/vehicle/${this.params.vehicleId}`
             axios.get(endpoint)
                 .then((response) => {
                     this.isVehicleInfoLoading = false;
                     this.isVehicleInfoLoaded = true;
+                    this.isVehicleInfoError = false;
+
                     this.vehicleInfo = response.data;
 
                     this.form.rvBIR = Number(response.data.concessionaire.bir);
@@ -462,6 +474,7 @@ export default {
                 .catch(() => {
                     this.isVehicleInfoLoading = false;
                     this.isVehicleInfoLoaded = false;
+                    this.isVehicleInfoError = true;
                 })
         },
 
