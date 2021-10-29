@@ -41,3 +41,17 @@
     font-weight: 400;
     font-style: normal
 }
+
+@font-face {
+    font-family: "readBeta2";
+    font-weight: 400;
+    font-display: swap;
+    src: url(../fonts/readBeta2-Light.woff2) format("woff2"),url(../fonts/readBeta2-Light.woff) format("woff")
+}
+
+@font-face {
+    font-family: "readBeta2";
+    font-weight: 600;
+    font-display: swap;
+    src: url(../fonts/readBeta2-Medium.woff2) format("woff2"),url(../fonts/readBeta2-Medium.woff) format("woff")
+}

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div :class="['legal-info-component', {'expanded': expanded}]">
-            <div class="legal-info-label" @click="onToggle">{{ title }}</div>
+            <div class="legal-info-label" @click="onToggle"><div class="toggle-circle"></div>{{ title }}</div>
             <div class="legal-info-text-content" v-show="expanded" v-html="content"></div>
         </div>
         <p class="legal-info-disclamer">{{ hint }}</p>

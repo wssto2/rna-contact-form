@@ -18,7 +18,7 @@
 
 #rna-contact-form.renault {
     color: #000;
-    font-family: NouvelR, Verdana, Arial, sans-serif;
+    font-family: NouvelR, sans-serif;
     font-size: 10px;
     line-height: 1.45;
     -moz-osx-font-smoothing: grayscale;
@@ -27,9 +27,8 @@
 
 #rna-contact-form.dacia {
     color: #606164;
-    font-family: Dacia, Verdana, Arial, sans-serif;
-    font-size: 18px;
-    font-weight: bold;
+    font-family: "readBeta2", sans-serif;
+    font-size: 13px;
 }
 
 #rna-contact-form.nissan {
@@ -326,12 +325,12 @@
     display: inline-block;
     border: 1px solid #d9d9d6;
     border-radius: 50%;
-    width: 23px;
-    height: 23px;
-    min-width: 23px;
-    max-width: 23px;
-    min-height: 23px;
-    max-height: 23px;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    max-height: 20px;
 }
 
 #rna-contact-form.nissan .checkbox label:before {
@@ -373,22 +372,35 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 23px;
-    width: 23px;
+    height: 20px;
+    width: 20px;
 }
 
-#rna-contact-form.renault .checkbox .gdpr-radio-button:after,
-#rna-contact-form.dacia .checkbox .gdpr-radio-button:after {
+#rna-contact-form.renault .checkbox .gdpr-radio-button:after {
     position: absolute;
     transform: translateY(-50%);
     top: 11px;
     content: "";
-    left: 5px;
+    left: 4px;
     display: inline-block;
     border-radius: 50%;
     width: 14px;
     height: 14px;
     background-color: #000;
+    display: none;
+}
+
+#rna-contact-form.dacia .checkbox .gdpr-radio-button:after {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 11px;
+    content: "";
+    left: 4px;
+    display: inline-block;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    background-color: #646b52;
     display: none;
 }
 
@@ -483,6 +495,19 @@
     position: relative;
     font-size: 14px;
     font-weight: bold;
+}
+
+#rna-contact-form.dacia .legal-info-component .legal-info-label .toggle-circle {
+    transform: translateY(-50%);
+    top: 50%;
+    position: absolute;
+    right: 6px;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    border: 2px solid #646b52;
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 #rna-contact-form.renault .legal-info-component .legal-info-label::before,
@@ -832,7 +857,7 @@
     padding: 16px 8px;
     border: 1px solid #d9d9d6;
     margin: 0;
-    font-family: Dacia;
+    font-family: "readBeta2";
     font-size: 16px;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -956,7 +981,7 @@
     margin: 0px;
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
-    font-family: "Dacia";
+    font-family: "readBeta2";
     font-size: 16px;
     cursor: pointer;
     background-image: none;
