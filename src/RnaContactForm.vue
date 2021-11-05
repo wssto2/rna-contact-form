@@ -56,9 +56,9 @@
                                 full-width
                                 name="select_concessionaire"
                                 :options="vehicleInfo.concessionaires"
-                                options-key="bir"
+                                options-key="id"
                                 options-value="naziv"
-                                :value="form.rvBIR"
+                                :value="form.koncesionari_id"
                                 @input="onSelectConcessionaire"
                                 required
                                 :error="getFieldError('select_concessionaire')" />
@@ -445,11 +445,11 @@ export default {
 
         selectedConcessionaire() {
 
-            if (! this.vehicleInfo || ! this.vehicleInfo.concessionaires || ! this.form.rvBIR) {
+            if (! this.vehicleInfo || ! this.vehicleInfo.concessionaires || ! this.form.koncesionari_id) {
                 return null;
             }
 
-            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.bir.toString() === this.form.rvBIR.toString());
+            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.id.toString() === this.form.koncesionari_id.toString());
 
             return concessionaire ? concessionaire : null;
         }
@@ -509,14 +509,11 @@ export default {
 
                     this.vehicleInfo = response.data;
 
-                    if (! response.data.rnaStock) {
-                        this.form.rvBIR = Number(response.data.concessionaire.bir);
-                    }
-
                     if (this.vehicleInfo.concessionaires && this.vehicleInfo.concessionaires.length > 0) {
-                        this.vehicleInfo.concessionaires = [{ bir: 0, naziv: 'Odaberite'}, ...this.vehicleInfo.concessionaires];
+                        this.vehicleInfo.concessionaires = [{ id: 0, naziv: 'Odaberite'}, ...this.vehicleInfo.concessionaires];
                     }
 
+                    this.form.rvBIR = Number(response.data.concessionaire.bir);
                     this.form.rvID = Number(response.data.id);
                     this.form.novo_vozilo = response.data.new_vehicle;
                 })
@@ -695,15 +692,15 @@ export default {
             })
         },
 
-        onSelectConcessionaire(concessionaireBir) {
-            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.bir.toString() === concessionaireBir.toString());
+        onSelectConcessionaire(concessionaireId) {
+            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.id.toString() === concessionaireId.toString());
 
             if (! concessionaire) {
                 return;
             }
 
-            this.form.rvBIR = concessionaireBir;
-            this.form.koncesionari_id = concessionaire.id;
+            this.form.rvBIR = Number(concessionaire.bir);
+            this.form.koncesionari_id = Number(concessionaire.id);
         }
     }
 }
