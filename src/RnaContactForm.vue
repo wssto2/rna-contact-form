@@ -39,7 +39,7 @@
                         <h6>{{ getVehicleInfo('name') }}</h6>
                         <p>
                             <span v-if="Number(form.novo_vozilo) !== 1">{{ getVehicleInfo('manufacture_year') }}, {{ getVehicleInfo('mileage') }} km<br></span>
-                            {{ getVehicleInfo('engine_capacity') }} ccm, {{ getVehicleInfo('engine_power') }} kW
+                            <span>{{ getVehicleInfo('engine_capacity') }} ccm,</span> {{ getVehicleInfo('engine_power') }} kW
                             <br>
                             {{ trans('gearbox') }}: {{ getVehicleInfo('gearbox.naziv') }}<span v-if="getVehicleInfo('transmission.naziv')">, {{ getVehicleInfo('transmission.naziv') }}</span>
                             <br>
@@ -47,14 +47,41 @@
                         </p>
                     </div>
                     <div class="concessionaire-column">
-                        <h3 class="column-heading">{{ trans('selected_concessionaire') }}</h3>
-                        <p>
-                            {{ vehicleInfo.location.naziv_tvrtke ? vehicleInfo.location.naziv_tvrtke : vehicleInfo.concessionaire.naziv }}
-                            <br>
-                            {{ vehicleInfo.concessionaire.adresa }}
-                            <br>
-                            {{ vehicleInfo.concessionaire.pb }} {{ vehicleInfo.concessionaire.grad }}
-                        </p>
+                        <template v-if="vehicleInfo.rnaStock">
+                            <h3 class="column-heading">{{ trans('selected_concessionaire') }}</h3>
+
+                            <!-- Koncesionari -->
+                            <SelectField
+                                style="margin-bottom: 30px;"
+                                full-width
+                                name="select_concessionaire"
+                                :options="vehicleInfo.concessionaires"
+                                options-key="bir"
+                                options-value="naziv"
+                                :value="form.rvBIR"
+                                @input="onSelectConcessionaire"
+                                required
+                                :error="getFieldError('select_concessionaire')" />
+
+                            <template v-if="selectedConcessionaire">
+                                <h6>{{ selectedConcessionaire.naziv }}</h6>
+                                <p>
+                                    {{ selectedConcessionaire.adresa }}
+                                    <br>
+                                    {{ selectedConcessionaire.pb }} {{ selectedConcessionaire.grad }}
+                                </p>
+                            </template>
+                        </template>
+                        <template v-else>
+                            <h3 class="column-heading">{{ trans('selected_concessionaire') }}</h3>
+                            <p>
+                                {{ vehicleInfo.location.naziv_tvrtke ? vehicleInfo.location.naziv_tvrtke : vehicleInfo.concessionaire.naziv }}
+                                <br>
+                                {{ vehicleInfo.concessionaire.adresa }}
+                                <br>
+                                {{ vehicleInfo.concessionaire.pb }} {{ vehicleInfo.concessionaire.grad }}
+                            </p>
+                        </template>
                     </div>
                 </template>
             </div>
@@ -401,6 +428,10 @@ export default {
                 requiredFields.push('ulica', 'kbr', 'pb', 'mjesto');
             }
 
+            if (this.vehicleInfo.rnaStock) {
+                requiredFields.push('select_concessionaire');
+            }
+
             return requiredFields;
         },
 
@@ -410,6 +441,17 @@ export default {
             }
 
             return this.vehicleInfo.photos.map((p) => p.url);
+        },
+
+        selectedConcessionaire() {
+
+            if (! this.vehicleInfo || ! this.vehicleInfo.concessionaires || ! this.form.rvBIR) {
+                return null;
+            }
+
+            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.bir.toString() === this.form.rvBIR.toString());
+
+            return concessionaire ? concessionaire : null;
         }
     },
 
@@ -467,7 +509,14 @@ export default {
 
                     this.vehicleInfo = response.data;
 
-                    this.form.rvBIR = Number(response.data.concessionaire.bir);
+                    if (! response.data.rnaStock) {
+                        this.form.rvBIR = Number(response.data.concessionaire.bir);
+                    }
+
+                    if (this.vehicleInfo.concessionaires && this.vehicleInfo.concessionaires.length > 0) {
+                        this.vehicleInfo.concessionaires = [{ bir: 0, naziv: 'Odaberite'}, ...this.vehicleInfo.concessionaires];
+                    }
+
                     this.form.rvID = Number(response.data.id);
                     this.form.novo_vozilo = response.data.new_vehicle;
                 })
@@ -644,6 +693,17 @@ export default {
                 this.isError = true;
                 this.isSubmitting = false;
             })
+        },
+
+        onSelectConcessionaire(concessionaireBir) {
+            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.bir.toString() === concessionaireBir.toString());
+
+            if (! concessionaire) {
+                return;
+            }
+
+            this.form.rvBIR = concessionaireBir;
+            this.form.koncesionari_id = concessionaire.id;
         }
     }
 }

@@ -1,15 +1,15 @@
 <template>
     <div class="section dropdown">
         <div aria-required="true" class="form-group required">
-            <label for="title">Status</label>
-            <div class="custom-selectbox">
+            <label v-if="label" for="title">{{ label }}</label>
+            <div class="custom-selectbox" :style="fullWidth ? 'max-width: 100%;' : ''">
                 <select name="title" id="title" @change="$emit('input', $event.target.value)">
                     <option
                         v-for="option in options"
                         :key="`${name}_option_${option.id}`"
-                        :selected="value == option.id"
-                        :value="option.id"
-                        :class="[{'selected-value': value == option.id}]">{{ option.name }}</option>
+                        :selected="value == option [optionsKey]"
+                        :value="option [optionsKey]"
+                        :class="[{'selected-value': value == option [optionsKey]}]">{{ option [optionsValue] }}</option>
                 </select>
                 <span :class="['selectedValue', {'isInvalid': error}]">{{ selectedValue }}</span>
                 <template v-if="error">
@@ -50,22 +50,37 @@ export default {
         options: {
             type: Array,
             default: () => { return [] }
+        },
+
+        optionsKey: {
+            type: String,
+            default: 'id'
+        },
+
+        optionsValue: {
+            type: String,
+            default: 'name'
+        },
+
+        fullWidth: {
+            type: Boolean,
+            default: false
         }
     },
 
     computed: {
         selectedValue() {
             if (!this.options || !this.value) {
-                return this.options [0].name;
+                return this.options [0][this.optionsValue];
             }
 
-            let option = this.options.find((o) => o.id.toString() === this.value.toString());
+            let option = this.options.find((o) => o [this.optionsKey].toString() === this.value.toString());
 
-            if (!option || !option.name) {
-                return this.options [0].name;
+            if (!option || !option [this.optionsValue]) {
+                return this.options [0][this.optionsValue];
             }
 
-            return option.name || '';
+            return option [this.optionsValue] || '';
         }
     }
 }
