@@ -724,7 +724,7 @@ export default {
                 window.dataLayer.push({
                     'formType' : 'purchase_request',
                     'formCategory' : 'lead_newcar',
-                    'leadId' : '$leadId',
+                    'leadId' : '',
                     'event' : 'formValidate',
                     'pageType' : 'form',
                     'businessType' : 'new-car',
