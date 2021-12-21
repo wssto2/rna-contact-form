@@ -516,6 +516,8 @@ export default {
                     this.form.rvBIR = Number(response.data.concessionaire.bir);
                     this.form.rvID = Number(response.data.id);
                     this.form.novo_vozilo = response.data.new_vehicle;
+
+                    this.fireGoogleTagManagerFormOpenedEvent();
                 })
                 .catch(() => {
                     this.isVehicleInfoLoading = false;
@@ -681,7 +683,7 @@ export default {
                     this.isError = false;
 
                     this.fireGoogleAnalyticsEvents();
-                    this.fireGoogleTagManagerEvents();
+                    this.fireGoogleTagManagerFormSubmitEvent();
 
                 } else {
                     this.isSubmitted = false;
@@ -719,21 +721,38 @@ export default {
                 console.warn("Google Analytics not installed!");
             }
         },
-        fireGoogleTagManagerEvents: function() {
-            if (typeof window.dataLayerOne === "object") {
-                window.dataLayer.push({
-                    'formType' : 'purchase_request',
-                    'formCategory' : 'lead_newcar',
-                    'leadId' : '',
-                    'event' : 'formValidate',
-                    'pageType' : 'form',
-                    'businessType' : 'new-car',
-                    'dealerName' : this.vehicleInfo.concessionaire && this.vehicleInfo.concessionaire.naziv,
-                    'dealerId' : this.form.rvBIR,
-                    'vehicleModel' : this.vehicleInfo.name,
-                    'vehicleId' : this.form.rvID
-                });
-            }
+
+        fireGoogleTagManagerFormOpenedEvent() {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'formType' : 'purchase_request',
+                'formCategory' : 'lead_newcar',
+                'formStepName' : 'start',
+                'formStepNumber' : 'step-0',
+                'event' : 'formOpen',
+                'pageType' : 'form',
+                'businessType' : 'new-car',
+                'dealerName' : this.vehicleInfo.concessionaire && this.vehicleInfo.concessionaire.naziv,
+                'dealerId' : this.form.rvBIR,
+                'vehicleModel' : this.vehicleInfo.name,
+                'vehicleId' : this.form.rvID
+            });
+        },
+
+        fireGoogleTagManagerFormSubmitEvent: function() {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'formType' : 'purchase_request',
+                'formCategory' : 'lead_newcar',
+                'leadId' : '',
+                'event' : 'formValidate',
+                'pageType' : 'form',
+                'businessType' : 'new-car',
+                'dealerName' : this.vehicleInfo.concessionaire && this.vehicleInfo.concessionaire.naziv,
+                'dealerId' : this.form.rvBIR,
+                'vehicleModel' : this.vehicleInfo.name,
+                'vehicleId' : this.form.rvID
+            });
         },
     }
 }
