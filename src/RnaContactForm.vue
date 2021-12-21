@@ -679,6 +679,10 @@ export default {
                 if (data == "1") {
                     this.isSubmitted = true;
                     this.isError = false;
+
+                    this.fireGoogleAnalyticsEvents();
+                    this.fireGoogleTagManagerEvents();
+
                 } else {
                     this.isSubmitted = false;
                     this.isError = true;
@@ -701,7 +705,36 @@ export default {
 
             this.form.rvBIR = Number(concessionaire.bir);
             this.form.koncesionari_id = Number(concessionaire.id);
-        }
+        },
+
+        fireGoogleAnalyticsEvents() {
+            let eventLabel = "ARV_used";
+            if (Number(this.form.novo_vozilo) === 1) eventLabel = "ARV_new";
+
+            if (typeof window.ga === "function") {
+                window.ga('masterTracker.send', { hitType: 'event', eventCategory: 'Leadforms', eventAction: 'Submit', eventLabel: eventLabel });
+                window.ga('dealerTracker.send', { hitType: 'event', eventCategory: 'Leadforms', eventAction: 'Submit', eventLabel: eventLabel });
+                window.ga('send', { hitType: 'event', eventCategory: 'Leadforms', eventAction: 'Submit', eventLabel: eventLabel });
+            } else {
+                console.warn("Google Analytics not installed!");
+            }
+        },
+        fireGoogleTagManagerEvents: function() {
+            if (typeof window.dataLayerOne === "object") {
+                window.dataLayer.push({
+                    'formType' : 'purchase_request',
+                    'formCategory' : 'lead_newcar',
+                    'leadId' : '$leadId',
+                    'event' : 'formValidate',
+                    'pageType' : 'form',
+                    'businessType' : 'new-car',
+                    'dealerName' : this.vehicleInfo.concessionaire && this.vehicleInfo.concessionaire.naziv,
+                    'dealerId' : this.form.rvBIR,
+                    'vehicleModel' : this.vehicleInfo.name,
+                    'vehicleId' : this.form.rvID
+                });
+            }
+        },
     }
 }
 </script>
