@@ -55,10 +55,10 @@ export default {
     },
     messages: {
         success: {
-            title_new_vehicle: 'Hvala Vam za upit o vozilu sa zalihe',
-            title_used_vehicle: 'Hvala Vam za upit o rabljenom vozilu',
-            description_new_vehicle: 'Hvala. Va&scaron; upit je proslije&#273;en odabranom ovla&scaron;tenom koncesionaru. Kontaktirat &#263;e Vas u najkra&#263;em mogu&#263;em roku.',
-            description_used_vehicle: 'Hvala. Va&scaron; upit je proslije&#273;en odabranom ovla&scaron;tenom koncesionaru. Kontaktirat &#263;e Vas u najkra&#263;em mogu&#263;em roku.'
+            title_new_vehicle: 'Hvala za vaše povpraševanje za vozilo iz zaloge',
+            title_used_vehicle: 'Hvala za vaše povpraševanje za rabljeno vozilo',
+            description_new_vehicle: 'Vaše spletno povpraševanje je posredovano izbranemu pooblaščenemu prodajalcu. Kontaktiral vas bo v najkrajšem možnem času.',
+            description_used_vehicle: 'Vaše spletno povpraševanje je posredovano izbranemu pooblaščenemu prodajalcu. Kontaktiral vas bo v najkrajšem možnem času.'
         },
         error: {
             title_new_vehicle: 'Upit o vozilu sa zalihe nije poslan',

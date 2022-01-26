@@ -57,8 +57,8 @@ export default {
         success: {
             title_new_vehicle: 'Hvala Vam za upit o vozilu sa zalihe',
             title_used_vehicle: 'Hvala Vam za upit o rabljenom vozilu',
-            description_new_vehicle: 'Hvala. Va&scaron; upit je proslije&#273;en odabranom ovla&scaron;tenom koncesionaru. Kontaktirat &#263;e Vas u najkra&#263;em mogu&#263;em roku.',
-            description_used_vehicle: 'Hvala. Va&scaron; upit je proslije&#273;en odabranom ovla&scaron;tenom koncesionaru. Kontaktirat &#263;e Vas u najkra&#263;em mogu&#263;em roku.'
+            description_new_vehicle: 'Vaš upit je proslijeđen odabranom ovlaštenom koncesionaru. Kontaktirat će Vas u najkraćem mogućem roku.',
+            description_used_vehicle: 'Vaš upit je proslijeđen odabranom ovlaštenom koncesionaru. Kontaktirat će Vas u najkraćem mogućem roku.'
         },
         error: {
             title_new_vehicle: 'Upit o vozilu sa zalihe nije poslan',
