@@ -63,8 +63,8 @@ export default {
         error: {
             title_new_vehicle: 'Upit o vozilu sa zalihe nije poslan',
             title_used_vehicle: 'Upit o rabljenom vozilu nije poslan',
-            description_new_vehicle: 'Do&scaron;lo je do pogre&scaron;ke prilikom slanja e-maila. Molimo Vas da poku&scaron;ate ponovo popuniti formu na stranici: <a href="javascript:location.reload();">Kupnja vozila sa zalihe</a>.',
-            description_used_vehicle: 'Do&scaron;lo je do pogre&scaron;ke prilikom slanja e-maila. Molimo Vas da poku&scaron;ate ponovo popuniti formu na stranici: <a href="javascript:location.reload();">Kupnja rabljenog vozila</a>.'
+            description_new_vehicle: 'Došlo je do greške prilikom slanja e-maila. Molimo Vas da pokušate ponovo da popunite formu na stranici: <a href="javascript:location.reload();">Kupnja vozila sa zalihe</a>.',
+            description_used_vehicle: 'Došlo je do greške prilikom slanja e-maila. Molimo Vas da pokušate ponovo da popunite formu na stranici: <a href="javascript:location.reload();">Kupnja polovnog vozila</a>.'
         },
         vehicle_not_found: {
             title: 'Vozilo ne postoji',
