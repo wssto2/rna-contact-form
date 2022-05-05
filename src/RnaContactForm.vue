@@ -513,7 +513,7 @@ export default {
                         this.vehicleInfo.concessionaires = [{ id: 0, naziv: 'Odaberite'}, ...this.vehicleInfo.concessionaires];
                     }
 
-                    this.form.rvBIR = Number(response.data.concessionaire.bir);
+                    this.form.rvBIR = response.data.concessionaire.bir.toString();
                     this.form.rvID = Number(response.data.id);
                     this.form.novo_vozilo = response.data.new_vehicle;
 
@@ -706,7 +706,7 @@ export default {
                 return;
             }
 
-            this.form.rvBIR = Number(concessionaire.bir);
+            this.form.rvBIR = concessionaire.bir.toString();
             this.form.koncesionari_id = Number(concessionaire.id);
         },
 
