@@ -249,11 +249,11 @@
     position: relative;
     font-size: 15px;
 }
-
-#rna-contact-form.renault .form-check-label p,
-#rna-contact-form.dacia .form-check-label p {
+#rna-contact-form.renault .gdpr.section .form-check-label p,
+#rna-contact-form.dacia .gdpr.section .form-check-label p {
     font-size: 14px;
     margin: 16px 0;
+    font-weight: normal;
 }
 
 #rna-contact-form .checkbox.section.form-group {
