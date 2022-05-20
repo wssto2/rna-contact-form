@@ -601,17 +601,18 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     color: #000;
-    background: linear-gradient(90deg,#ffda66 50%,#ffce33 0);
+    background-color: #efdf00;
     background-size: 200% 100%;
     background-position: 100% 100%;
-    transition: background-position .3s;
-    text-transform: uppercase;
+    text-transform: capitalize;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto;    
+    transition: .3s ease-out;
+    transition-property: background-color,color,border-color;
 }
 
 #rna-contact-form.renault .submit-form-button:hover {
-    background-position: 0 100%;
+    background-color: #f8eb4c;
 }
 
 #rna-contact-form.dacia .submit-form-button {
