@@ -533,7 +533,8 @@ export default {
                 rs: "https://polovna-vozila.renault.rs/",
                 ba: "https://rabljena-vozila.renault.ba/",
                 me: "https://upotrebljavana-vozila.renault.me/",
-                rks: "https://certified-admin.automita.com/"
+                rks: "https://certified-admin.automita.com/",
+                mk: "https://koristeni-vozila.renault.mk/",
             }
 
             return arvUrls [country] || arvUrls [this.params.country];
