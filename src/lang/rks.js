@@ -26,7 +26,7 @@ export default {
         city: "Qyteti",
         telephone: "Telefoni celular",
         telephone_help: "Shkruani numrin e celularit pa hapësira",
-        gdpr_contact_email: "E-posta",
+        gdpr_contact_email: "E-posta*",
         gdpr_contact_sms: "SMS",
         gdpr_contact_telephone: "Telefoni",
         gdpr_contact_postal: "Posta",
