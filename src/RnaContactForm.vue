@@ -33,7 +33,7 @@
                                 @stopping="showCarouselPointer = true" />
                         </div>
                         <template v-else>
-                            <img v-if="getVehicleInfo('thumbnail')" :src="getVehicleInfo('thumbnail')" alt="">
+                            <img v-if="vehicleThumbnailUrl" :src="vehicleThumbnailUrl" alt="">
                         </template>
 
                         <h6>{{ getVehicleInfo('name') }}</h6>
@@ -368,11 +368,11 @@ export default {
     computed: {
 
         vehicleThumbnailUrl() {
-            if (! this.params.vehicleId || ! this.vehicleInfo.thumbnail || ! this.vehicleInfo.thumbnail.id) {
+            if (! this.params.vehicleId || ! this.vehicleInfo.photos || ! this.vehicleInfo.photos [0]) {
                 return;
             }
 
-            return `https://static.rabljena-vozila.com/${this.params.country}/rabljena_vozila/${this.params.vehicleId}/1/${this.vehicleInfo.thumbnail.id}`;
+            return `https://static.rabljena-vozila.com/${this.params.country}/rabljena_vozila/${this.params.vehicleId}/1/${this.vehicleInfo.photos [0].id}`;
         },
 
         statusOptions() {
