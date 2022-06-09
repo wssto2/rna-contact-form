@@ -27,9 +27,9 @@ export default {
         telephone: "Телефонски број",
         telephone_help: "Запишете го телефонскиот број без празни места",
         gdpr_contact_email: "Е-пошта*",
-        gdpr_contact_sms: "порака",
+        gdpr_contact_sms: "Порака",
         gdpr_contact_telephone: "Телефон",
-        gdpr_contact_postal: "пошта",
+        gdpr_contact_postal: "Пошта",
         message: "Порака"
     },
     gdpr_title: "Би сакал да добивам персонализирани понуди за купување возила и постпродажни производи и услуги и информации за персонализирани поволности и настани, како и други актуелни вести од Renault Nissan Р. С. Македонија, која ги претставува Renault, Dacia, Nissan и овластени дистрибутери каде и се наоѓаат и сите мои податоци.",
