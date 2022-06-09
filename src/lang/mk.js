@@ -26,7 +26,7 @@ export default {
         city: "Град",
         telephone: "Телефонски број",
         telephone_help: "Запишете го телефонскиот број без празни места",
-        gdpr_contact_email: "Е-пошта",
+        gdpr_contact_email: "Е-пошта*",
         gdpr_contact_sms: "порака",
         gdpr_contact_telephone: "Телефон",
         gdpr_contact_postal: "пошта",
