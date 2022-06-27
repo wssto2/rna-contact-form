@@ -1,4 +1,6 @@
 export default {
+    yes: "Da",
+    no: "Ne",
     selected_vehicle: "Одбрано возило",
     selected_concessionaire: "Одбран концесионер",
     gearbox: "Менувач",

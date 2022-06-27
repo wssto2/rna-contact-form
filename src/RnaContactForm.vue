@@ -188,6 +188,8 @@
                         :label="trans('fields.gdpr_contact_email')"
                         name="kontakt_kanal_email"
                         v-model="form.kontakt_kanal_email"
+                        :yes-label="trans('yes')"
+                        :no-label="trans('no')"
                         :error="getFieldError('kontakt_kanal_email')" />
 
                     <!-- GDPR: SMS -->
@@ -195,6 +197,8 @@
                         :label="trans('fields.gdpr_contact_sms')"
                         name="kontakt_kanal_sms"
                         v-model="form.kontakt_kanal_sms"
+                        :yes-label="trans('yes')"
+                        :no-label="trans('no')"
                         :error="getFieldError('kontakt_kanal_sms')" />
 
                     <!-- GDPR: Telefon -->
@@ -202,6 +206,8 @@
                         :label="trans('fields.gdpr_contact_telephone')"
                         name="kontakt_kanal_telefon"
                         v-model="form.kontakt_kanal_telefon"
+                        :yes-label="trans('yes')"
+                        :no-label="trans('no')"
                         :error="getFieldError('kontakt_kanal_telefon')" />
 
                     <!-- GDPR: Obicna posta -->
@@ -209,6 +215,8 @@
                         :label="trans('fields.gdpr_contact_postal')"
                         name="kontakt_kanal_posta"
                         v-model="form.kontakt_kanal_posta"
+                        :yes-label="trans('yes')"
+                        :no-label="trans('no')"
                         :error="getFieldError('kontakt_kanal_posta')" />
                 </div>
 

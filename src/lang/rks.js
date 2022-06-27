@@ -1,4 +1,6 @@
 export default {
+    yes: "Po",
+    no: "Jo",
     selected_vehicle: "Automjeti i zgjedhur",
     selected_concessionaire: "Dileri i zgjedhur",
     gearbox: "Ndërruesi",
