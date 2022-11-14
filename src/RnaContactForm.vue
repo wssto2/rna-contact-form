@@ -181,7 +181,7 @@
 
                 <!-- GDPR -->
                 <div class="gdpr section">
-                    <p v-html="trans('gdpr_title')"></p>
+                    <p v-html="trans('gdpr_title_' + params.brand)"></p>
 
                     <!-- GDPR: Email -->
                     <GdprRadio
