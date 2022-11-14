@@ -221,7 +221,7 @@
                 </div>
 
                 <LegalAccordion
-                    :title="trans('legal_disclaimer_title')"
+                    :title="trans('legal_disclaimer_title_' + params.brand)"
                     :content="trans('legal_disclaimer_content_' + params.brand)"
                     :hint="trans('legal_disclaimer_hint')"
                     v-model="form.procitane_pravne_obavijesti"
