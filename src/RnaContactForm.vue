@@ -469,8 +469,8 @@ export default {
         },
 
         resolveEndpoints() {
-            this.gdprScreenshotEndpoint = this.arvUrl() + 'forms/screenshot_v3.php';
-            this.submitEndpoint = this.arvUrl() + 'forms/send-gdpr/rabljena_vozila/' + this.country + '/';
+            this.gdprScreenshotEndpoint = this.arvUrl() + 'forms/screenshot_v5.php';
+            this.submitEndpoint = this.arvUrl() + 'forms/send-gdpr-v5/rabljena_vozila/' + this.country + '/';
         },
 
         isCountryValid() {
