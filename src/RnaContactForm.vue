@@ -136,40 +136,13 @@
                     required
                     :error="getFieldError('email')" />
 
-                <!-- Ulica -->
-                <TextField
-                    :label="trans('fields.street')"
-                    name="ulica"
-                    v-model="form.ulica"
-                    :error="getFieldError('ulica')" />
-
-                <!-- Kucni broj -->
-                <TextField
-                    :label="trans('fields.house_number')"
-                    name="kbr"
-                    v-model="form.kbr"
-                    :error="getFieldError('kbr')" />
-
-                <!-- Postanski broj -->
-                <TextField
-                    :label="trans('fields.postal_code')"
-                    name="pb"
-                    v-model="form.pb"
-                    :error="getFieldError('pb')" />
-
-                <!-- Grad -->
-                <TextField
-                    :label="trans('fields.city')"
-                    name="mjesto"
-                    v-model="form.mjesto"
-                    :error="getFieldError('mjesto')" />
-
                 <!-- Broj telefona -->
                 <TextField
                     :label="trans('fields.telephone')"
                     name="tel"
                     :help="trans('fields.telephone_help')"
                     v-model="form.tel"
+                    required
                     :error="getFieldError('tel')" />
 
                 <!-- Poruka -->
@@ -192,15 +165,6 @@
                         :no-label="trans('no')"
                         :error="getFieldError('kontakt_kanal_email')" />
 
-                    <!-- GDPR: SMS -->
-                    <GdprRadio
-                        :label="trans('fields.gdpr_contact_sms')"
-                        name="kontakt_kanal_sms"
-                        v-model="form.kontakt_kanal_sms"
-                        :yes-label="trans('yes')"
-                        :no-label="trans('no')"
-                        :error="getFieldError('kontakt_kanal_sms')" />
-
                     <!-- GDPR: Telefon -->
                     <GdprRadio
                         :label="trans('fields.gdpr_contact_telephone')"
@@ -209,15 +173,6 @@
                         :yes-label="trans('yes')"
                         :no-label="trans('no')"
                         :error="getFieldError('kontakt_kanal_telefon')" />
-
-                    <!-- GDPR: Obicna posta -->
-                    <GdprRadio
-                        :label="trans('fields.gdpr_contact_postal')"
-                        name="kontakt_kanal_posta"
-                        v-model="form.kontakt_kanal_posta"
-                        :yes-label="trans('yes')"
-                        :no-label="trans('no')"
-                        :error="getFieldError('kontakt_kanal_posta')" />
                 </div>
 
                 <LegalAccordion
@@ -358,15 +313,9 @@ export default {
                 tvrtka: null,
                 email: null,
                 tel: null,
-                ulica: null,
-                kbr: null,
-                pb: null,
-                mjesto: null,
                 poruka: null,
                 kontakt_kanal_email: null,
                 kontakt_kanal_telefon: null,
-                kontakt_kanal_sms: null,
-                kontakt_kanal_posta: null,
                 procitane_pravne_obavijesti: null,
                 koncesionari_id: 0
             }
@@ -399,41 +348,18 @@ export default {
                 prezime: this.trans('validator.prezime'),
                 tvrtka: this.trans('validator.tvrtka'),
                 email: this.trans('validator.email'),
-                ulica: this.trans('validator.ulica'),
-                kbr: this.trans('validator.kbr'),
-                pb: this.trans('validator.pb'),
-                mjesto: this.trans('validator.mjesto'),
                 tel: this.trans('validator.tel'),
                 kontakt_kanal_email: this.trans('validator.kontakt_kanal_email'),
+                kontakt_kanal_telefon: this.trans('validator.kontakt_kanal_telefon'),
                 procitane_pravne_obavijesti: this.trans('validator.procitane_pravne_obavijesti')
             }
         },
 
-        isTelephoneChannelSelected() {
-            return !!this.form.kontakt_kanal_telefon;
-        },
-
-        isSmsChannelSelected() {
-            return !!this.form.kontakt_kanal_sms;
-        },
-
-        isMailChannelSelected() {
-            return !!this.form.kontakt_kanal_posta;
-        },
-
         requiredFields() {
-            let requiredFields = ['status', 'ime', 'prezime', 'email', 'kontakt_kanal_email', 'procitane_pravne_obavijesti'];
+            let requiredFields = ['status', 'ime', 'prezime', 'email', 'tel', 'kontakt_kanal_email', 'kontakt_kanal_telefon', 'procitane_pravne_obavijesti'];
 
             if (this.form.pravna_osoba) {
                 requiredFields.push('tvrtka');
-            }
-
-            if (this.isTelephoneChannelSelected || this.isSmsChannelSelected) {
-                requiredFields.push('tel');
-            }
-
-            if (this.isMailChannelSelected) {
-                requiredFields.push('ulica', 'kbr', 'pb', 'mjesto');
             }
 
             if (this.vehicleInfo.rnaStock) {
@@ -603,6 +529,10 @@ export default {
                 }
 
                 if (field === 'kontakt_kanal_email') {
+                    valid = this.form [field] !== null;
+                }
+
+                if (field === 'kontakt_kanal_telefon') {
                     valid = this.form [field] !== null;
                 }
 

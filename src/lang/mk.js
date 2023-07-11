@@ -57,6 +57,7 @@ export default {
 		mjesto: 'Ве молиме внесете го вашиот град.',
 		tel: 'Ве молиме внесете го вашиот телефонски број.',
 		kontakt_kanal_email: 'Ве молиме внесете го вашиот избор.',
+		kontakt_kanal_telefon: 'Ве молиме внесете го вашиот избор.',
 		procitane_pravne_obavijesti: 'Ве молиме прочитајте ги правните известувања.'
 	},
 	messages: {
