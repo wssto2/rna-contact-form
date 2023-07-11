@@ -163,6 +163,7 @@
                         v-model="form.kontakt_kanal_email"
                         :yes-label="trans('yes')"
                         :no-label="trans('no')"
+                        required
                         :error="getFieldError('kontakt_kanal_email')" />
 
                     <!-- GDPR: Telefon -->
@@ -172,6 +173,7 @@
                         v-model="form.kontakt_kanal_telefon"
                         :yes-label="trans('yes')"
                         :no-label="trans('no')"
+                        required
                         :error="getFieldError('kontakt_kanal_telefon')" />
                 </div>
 
