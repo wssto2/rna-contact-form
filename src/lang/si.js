@@ -49,19 +49,19 @@ export default {
     legal_disclaimer_hint: "Prosimo, obvezno preberite.",
     submit: "Pošlji",
     validator: {
-        status: 'Izberite svoj naziv.',
-        ime: 'Vpišite svoje ime.',
-        prezime: 'Vpišite svoj priimek.',
-        tvrtka: 'Vpišite ime podjetja.',
-        email: 'Vpišite svoj e-mail naslov.',
-        ulica: 'Vpišite svoju ulicu.',
-        kbr: 'Vpišite svoju hišnu številku.',
-        pb: 'Vpišite svoju poštnu številku.',
-        mjesto: 'Vpišite svoj kraj.',
-        tel: 'Vpišite svoju številku telefona.',
-        kontakt_kanal_email: 'Molimo da unesite svoj odabir.',
-        kontakt_kanal_telefon: 'Molimo da unesite svoj odabir.',
-        procitane_pravne_obavijesti: 'Molimo da pročitate pravne obavijesti.'
+        status: 'Izberite naziv',
+        ime: 'Vpišite svoje ime',
+        prezime: 'Vpišite svoj priimek',
+        tvrtka: 'Vpišite ime podjetja',
+        email: 'Vpišite svoj e-mail naslov',
+        ulica: 'Vpišite svoju ulicu',
+        kbr: 'Vpišite svoju hišnu številku',
+        pb: 'Vpišite svoju poštnu številku',
+        mjesto: 'Vpišite svoj kraj',
+        tel: 'Vpišite svojo telefonsko številko',
+        kontakt_kanal_email: 'Prosimo, vnesite svojo izbiro',
+        kontakt_kanal_telefon: 'Prosimo, vnesite svojo izbiro',
+        procitane_pravne_obavijesti: 'Molimo da pročitate pravne obavijesti'
     },
     messages: {
         success: {
