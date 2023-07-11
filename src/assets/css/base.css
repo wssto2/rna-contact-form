@@ -1164,6 +1164,7 @@
 }
 #rna-contact-form .legal-info-component .legal-info-text-content a {
 	color: inherit;
+    text-decoration: underline;
 }
 #rna-contact-form .legal-info-component .legal-info-text-content a:hover {
 	color: inherit;
