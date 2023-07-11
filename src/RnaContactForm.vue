@@ -175,12 +175,8 @@
                         :error="getFieldError('kontakt_kanal_telefon')" />
                 </div>
 
-                <LegalAccordion
-                    :title="trans('legal_disclaimer_title_' + params.brand)"
-                    :content="trans('legal_disclaimer_content_' + params.brand)"
-                    :hint="trans('legal_disclaimer_hint')"
-                    v-model="form.procitane_pravne_obavijesti"
-                    :error="getFieldError('procitane_pravne_obavijesti')" />
+                <LegalStatement
+                    :content="trans('legal_disclaimer_text_' + params.brand)" />
 
                 <div class="submit-form">
                     <button autocomplete="off" type="submit" class="submit-form-button">{{ trans('submit') }}</button>
@@ -198,7 +194,7 @@ import TextareaField from "./components/TextareaField.vue";
 import SelectField from "./components/SelectField.vue";
 import GdprRadio from "./components/GdprRadio.vue";
 import CustomerType from "./components/CustomerType.vue";
-import LegalAccordion from "./components/LegalAccordion.vue";
+import LegalStatement from "./components/LegalStatement.vue";
 import VueProduct360 from "@deviznet/vue-product-360";
 
 import './assets/css/base.css';
@@ -236,7 +232,7 @@ export default {
     },
 
     components: {
-        LegalAccordion,
+        LegalStatement,
         CustomerType,
         GdprRadio,
         SelectField,
@@ -316,7 +312,6 @@ export default {
                 poruka: null,
                 kontakt_kanal_email: null,
                 kontakt_kanal_telefon: null,
-                procitane_pravne_obavijesti: null,
                 koncesionari_id: 0
             }
         }
@@ -351,12 +346,11 @@ export default {
                 tel: this.trans('validator.tel'),
                 kontakt_kanal_email: this.trans('validator.kontakt_kanal_email'),
                 kontakt_kanal_telefon: this.trans('validator.kontakt_kanal_telefon'),
-                procitane_pravne_obavijesti: this.trans('validator.procitane_pravne_obavijesti')
             }
         },
 
         requiredFields() {
-            let requiredFields = ['status', 'ime', 'prezime', 'email', 'tel', 'kontakt_kanal_email', 'kontakt_kanal_telefon', 'procitane_pravne_obavijesti'];
+            let requiredFields = ['status', 'ime', 'prezime', 'email', 'tel', 'kontakt_kanal_email', 'kontakt_kanal_telefon'];
 
             if (this.form.pravna_osoba) {
                 requiredFields.push('tvrtka');
