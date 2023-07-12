@@ -326,6 +326,10 @@ export default {
                 return;
             }
 
+            if (Number(this.vehicleInfo.photos [0].source) === 4) {
+                return this.vehicleInfo.photos [0].url;
+            }
+
             return `https://static.rabljena-vozila.com/${this.params.country}/rabljena_vozila/${this.params.vehicleId}/1/${this.vehicleInfo.photos [0].id}`;
         },
 
