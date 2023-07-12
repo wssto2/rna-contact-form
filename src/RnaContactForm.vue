@@ -294,7 +294,7 @@ export default {
 
             form: {
                 isVehicleLagerForm: false,
-                forma_ver: 4,
+                forma_ver: 5,
                 odakle: 'RV',
                 marka: null,
                 rvBIR: null,
@@ -476,7 +476,7 @@ export default {
 
         resolveEndpoints() {
             this.gdprScreenshotEndpoint = this.arvUrl() + 'forms/screenshot_v5.php';
-            this.submitEndpoint = this.arvUrl() + 'forms/send-gdpr-v5/rabljena_vozila/' + this.country + '/';
+            this.submitEndpoint = this.arvUrl() + 'forms/send-gdpr/rabljena_vozila/' + this.country + '/';
         },
 
         isCountryValid() {
