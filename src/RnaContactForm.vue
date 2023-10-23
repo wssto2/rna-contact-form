@@ -322,16 +322,16 @@ export default {
     computed: {
 
         vehicleThumbnailUrl() {
-            if ( this.vehicleInfo.thumbnail) {
-                return this.vehicleInfo.thumbnail;
-            }
-
             if (! this.params.vehicleId || ! this.vehicleInfo.photos || ! this.vehicleInfo.photos [0]) {
                 return;
             }
 
             if (Number(this.vehicleInfo.photos [0].source) === 4) {
                 return this.vehicleInfo.photos [0].url;
+            }
+
+            if ( this.vehicleInfo.thumbnail) {
+                return this.vehicleInfo.thumbnail;
             }
 
             return `https://static.rabljena-vozila.com/${this.params.country}/rabljena_vozila/${this.params.vehicleId}/1/${this.vehicleInfo.photos [0].id}`;
