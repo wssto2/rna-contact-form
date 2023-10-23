@@ -322,6 +322,10 @@ export default {
     computed: {
 
         vehicleThumbnailUrl() {
+            if ( this.vehicleInfo.thumbnail) {
+                return this.vehicleInfo.thumbnail;
+            }
+
             if (! this.params.vehicleId || ! this.vehicleInfo.photos || ! this.vehicleInfo.photos [0]) {
                 return;
             }
