@@ -14,7 +14,7 @@
   "homepage": "https://github.com/wssto2/rna-contact-form",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --mode=production",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build --mode=production",
     "lint": "vue-cli-service lint",
     "buildOld": "npm run build:umd & npm run build:es & npm run build:unpkg",
     "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/main.umd.js",
