@@ -3,6 +3,8 @@ export default {
     no: "Ne",
     selected_vehicle: "Izbrano vozilo",
     selected_concessionaire: "Izbrani koncesionar",
+    exterior: "Zunanjost",
+    interior: "Notranjost",
     gearbox: "Menjalnik",
     exterior_color: "Barva",
     fields:  {

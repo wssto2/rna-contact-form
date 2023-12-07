@@ -24,13 +24,24 @@
                     <div class="vehicle-column">
                         <h3 class="column-heading">{{ trans('selected_vehicle') }}</h3>
 
-                        <div v-if="getVehicleInfo('has_three_sixty') === true" style="position:relative;">
-                            <div v-show="showCarouselPointer" class="threeSixtyPointer"></div>
+                        <div v-if="hasThreeSixty" style="position:relative;">
+                            <div v-show="(hasThreeSixty && showCarouselPointer) || (getVehicleInfo('interior_photo') && !showCarouselPointer)" class="threeSixtyPointer"></div>
                             <vue-product-360
-                                style="cursor: pointer;"
+                                v-if="hasThreeSixty && !showInteriorPhotos"
+                                :style="{ cursor: cursorStyle}"
                                 :images="threeSixtyImages"
-                                @starting="showCarouselPointer = false"
-                                @stopping="showCarouselPointer = true" />
+                                @starting="showCarouselPointer = false, cursorStyle = 'grabbing'"
+                                @stopping="showCarouselPointer = true, cursorStyle = 'grab'" />
+
+                            <vue-panellum v-if="showInteriorPhotos && getVehicleInfo('interior_photo')" :src="getVehicleInfo('interior_photo')" style="height: 173px;"></vue-panellum>
+
+                            <div class="threeSixtySwitch" v-if="getVehicleInfo('interior_photo')">
+                                <div>
+                                    <span class="switchText left custom" @click="changeSwitch('left')" data-direction="left">{{ trans('exterior') }}</span>
+                                    <span class="switchText right" @click="changeSwitch('right')" data-direction="right">{{ trans('interior') }}</span>
+                                    <div class="active" onload="changeSwitch('left')"></div>
+                                </div>
+                            </div>
                         </div>
                         <template v-else>
                             <img v-if="vehicleThumbnailUrl" :src="vehicleThumbnailUrl" alt="">
@@ -245,6 +256,7 @@ import GdprRadio from "./components/GdprRadio.vue";
 import CustomerType from "./components/CustomerType.vue";
 import LegalAccordion from "./components/LegalAccordion.vue";
 import VueProduct360 from "@deviznet/vue-product-360";
+import VuePanellum from 'vue-pannellum';
 
 import './assets/css/base.css';
 
@@ -287,7 +299,8 @@ export default {
         SelectField,
         TextField,
         TextareaField,
-        VueProduct360
+        VueProduct360,
+        VuePanellum
     },
 
     created() {
@@ -331,6 +344,8 @@ export default {
             submitEndpoint: null,
             screenshotTest: false,
             showCarouselPointer: true,
+            showInteriorPhotos: false,
+            cursorStyle: 'grab',
 
             vehicleInfo: {
                 name: null,
@@ -449,6 +464,10 @@ export default {
             }
 
             return requiredFields;
+        },
+
+         hasThreeSixty() {
+            return this.getVehicleInfo('has_three_sixty') || false;
         },
 
         threeSixtyImages() {
@@ -772,6 +791,32 @@ export default {
                 'vehicleId' : this.form.rvID
             });
         },
+
+        changeSwitch(direction) {
+            let element = document.querySelector('div.threeSixtySwitch div div.active');
+            let textElements = document.querySelectorAll('div.threeSixtySwitch div span');
+
+            textElements.forEach(span => {
+                span.classList.remove('active-switch');
+                span.classList.remove('custom');
+            });
+
+            if (!element.classList.contains(direction)) {
+                if (direction === 'left') {
+                    element.classList.remove('right');
+                    element.classList.add(direction);
+                    this.showInteriorPhotos = false;
+                }
+                if (direction === 'right') {
+                    element.classList.remove('left');
+                    element.classList.add(direction);
+                    this.showInteriorPhotos = true;
+                }
+            }
+
+            const clickedSpan = document.querySelector(`div.threeSixtySwitch div span.${direction}`);
+            clickedSpan.classList.add('active-switch');
+        }
     }
 }
 </script>

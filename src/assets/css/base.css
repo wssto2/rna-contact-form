@@ -817,6 +817,59 @@
     color: #343434;
 }
 
+#rna-contact-form .threeSixtySwitch {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#rna-contact-form .threeSixtySwitch div {
+    display: flex;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #e3e2e2;
+    border-radius: 25px;
+    z-index: 3;
+}
+
+#rna-contact-form .threeSixtySwitch div .switchText {
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 12px;
+    color: #5c5c5c;
+    z-index: 5;
+    transition: color 0.3s ease-in-out;
+}
+
+#rna-contact-form .threeSixtySwitch div .switchText.left.custom {
+    color: #fff;
+}
+
+#rna-contact-form .threeSixtySwitch div .active {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50.6%;
+    padding: 15px 25px;
+    z-index: 4;
+    border: 1px solid #000;
+    background-color: #000;
+    transform: translate(0, 0);
+    transition: transform 0.3s ease-in-out;
+}
+
+#rna-contact-form .threeSixtySwitch div .active.right {
+    transform: translate(100%, -3%);
+    padding-left: 24px;
+}
+
+#rna-contact-form .threeSixtySwitch div span.active-switch {
+    color: #fff;
+}
+
 #rna-contact-form .custom-selectbox select option {
     font-family: inherit;
 }
