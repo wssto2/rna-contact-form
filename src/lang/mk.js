@@ -5,6 +5,10 @@ export default {
 	selected_concessionaire: "Одбран концесионер",
 	gearbox: "Менувач",
 	exterior_color: "Боја",
+	exterior_color_metallic: "металик",
+    exterior_color_pearl: "pearl",
+    exterior_color_matte: "matte",
+    exterior_color_two_tone: "two tone",
 	fields:  {
 		customer_type: {
 			physical: "Физичко лице",

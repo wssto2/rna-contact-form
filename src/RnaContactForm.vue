@@ -38,12 +38,19 @@
 
                         <h6>{{ getVehicleInfo('name') }}</h6>
                         <p>
-                            <span v-if="Number(form.novo_vozilo) !== 1">{{ getVehicleInfo('manufacture_year') }}, {{ getVehicleInfo('mileage') }} km<br></span>
+                            <span v-if="Number(form.novo_vozilo) !== 1">{{ getVehicleInfo('manufacture_year') }}, {{ formatMileage(getVehicleInfo('mileage')) }} km<br></span>
                             <span>{{ getVehicleInfo('engine_capacity') }} ccm,</span> {{ getVehicleInfo('engine_power') }} kW
                             <br>
                             {{ trans('gearbox') }}: {{ getVehicleInfo('gearbox.naziv') }}<span v-if="getVehicleInfo('transmission.naziv')">, {{ getVehicleInfo('transmission.naziv') }}</span>
                             <br>
-                            {{ trans('exterior_color') }}: {{ getVehicleInfo('exterior_color') }}
+                            {{ trans('exterior_color') }}:
+                            {{ 
+                                getVehicleInfo('exterior_color') 
+                                + (getVehicleInfo('exterior_color_metallic') ? ', ' + trans('exterior_color_metallic') : '') 
+                                + (getVehicleInfo('exterior_color_pearl') ? ', ' + trans('exterior_color_pearl') : '') 
+                                + (getVehicleInfo('exterior_color_matte') ? ', ' + trans('exterior_color_matte') : '') 
+                                + (getVehicleInfo('exterior_color_two_tone') ? ', ' + trans('exterior_color_two_tone') : '') 
+                            }}
                         </p>
                     </div>
                     <div class="concessionaire-column">
@@ -651,6 +658,22 @@ export default {
 
             this.form.rvBIR = concessionaire.bir.toString();
             this.form.koncesionari_id = Number(concessionaire.id);
+        },
+
+        formatMileage(mileage) {
+            let mileageStr = String(mileage);
+            
+            let formattedMileage = "";
+            let count = 0;
+            for (let i = mileageStr.length - 1; i >= 0; i--) {
+                formattedMileage = mileageStr[i] + formattedMileage;
+                count++;
+                if (count % 3 === 0 && i !== 0) {
+                    formattedMileage = "." + formattedMileage;
+                }
+            }
+            
+            return formattedMileage;
         },
 
         fireGoogleAnalyticsEvents() {

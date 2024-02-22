@@ -5,6 +5,10 @@ export default {
     selected_concessionaire: "Izbrani koncesionar",
     gearbox: "Menjalnik",
     exterior_color: "Barva",
+    exterior_color_metallic: "kovinska",
+    exterior_color_pearl: "perla",
+    exterior_color_matte: "matte",
+    exterior_color_two_tone: "dvobojna karoserija",
     fields:  {
         customer_type: {
             physical: "Fizična oseba",

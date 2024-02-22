@@ -5,6 +5,10 @@ export default {
     selected_concessionaire: "Odabrani distributer",
     gearbox: "Menjač",
     exterior_color: "Boja",
+    exterior_color_metallic: "metalik",
+    exterior_color_pearl: "perla",
+    exterior_color_matte: "matte",
+    exterior_color_two_tone: "dvobojna karoserija",
     fields:  {
         customer_type: {
             physical: "Fizičko lice",
