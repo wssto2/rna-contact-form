@@ -84,9 +84,9 @@
                             <p>
                                 {{ vehicleInfo.location.naziv_tvrtke ? vehicleInfo.location.naziv_tvrtke : vehicleInfo.concessionaire.naziv }}
                                 <br>
-                                {{ vehicleInfo.concessionaire.adresa }}
+                                {{ vehicleInfo.location.adresa ? vehicleInfo.location.adresa :  vehicleInfo.concessionaire.adresa }}
                                 <br>
-                                {{ vehicleInfo.concessionaire.pb }} {{ vehicleInfo.concessionaire.grad }}
+                                {{ vehicleInfo.location.pb ? vehicleInfo.location.pb :  vehicleInfo.concessionaire.pb }} {{ vehicleInfo.location.grad ? vehicleInfo.location.grad : vehicleInfo.concessionaire.grad }}
                             </p>
                         </template>
                     </div>
