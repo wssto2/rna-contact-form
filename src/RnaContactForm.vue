@@ -547,6 +547,14 @@ export default {
                     valid = this.form [field] !== null;
                 }
 
+                /**
+                 * @jzlimen - 12.03.2024. - Validacija nije radila iz razloga sto se nakon odabira koncesionara u selectu
+                 * kod validacije provjeravalo nepostojece polje 'select_concessionaire' forme umjesto 'koncesionari_id'.
+                 */
+                if (field === 'select_concessionaire') {
+                    valid = Number(this.form ['koncesionari_id']) > 0;
+                }
+
                 if (!valid) {
                     errors.push(field);
                 }
