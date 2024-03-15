@@ -63,9 +63,9 @@
                                 full-width
                                 name="select_concessionaire"
                                 :options="vehicleInfo.concessionaires"
-                                options-key="id"
+                                options-key="bir"
                                 options-value="naziv"
-                                :value="form.koncesionari_id"
+                                :value="form.rvBIR"
                                 @input="onSelectConcessionaire"
                                 required
                                 :error="getFieldError('select_concessionaire')" />
@@ -390,11 +390,11 @@ export default {
 
         selectedConcessionaire() {
 
-            if (! this.vehicleInfo || ! this.vehicleInfo.concessionaires || ! this.form.koncesionari_id) {
+            if (! this.vehicleInfo || ! this.vehicleInfo.concessionaires || ! this.form.rvBIR) {
                 return null;
             }
 
-            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.id.toString() === this.form.koncesionari_id.toString());
+            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.bir.toString() === this.form.rvBIR.toString());
 
             return concessionaire ? concessionaire : null;
         }
