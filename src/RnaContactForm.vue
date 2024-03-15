@@ -63,9 +63,9 @@
                                 full-width
                                 name="select_concessionaire"
                                 :options="vehicleInfo.concessionaires"
-                                options-key="bir"
+                                options-key="id"
                                 options-value="naziv"
-                                :value="form.rvBIR"
+                                :value="form.koncesionar_lokacija_id"
                                 @input="onSelectConcessionaire"
                                 required
                                 :error="getFieldError('select_concessionaire')" />
@@ -321,7 +321,8 @@ export default {
                 poruka: null,
                 kontakt_kanal_email: null,
                 kontakt_kanal_telefon: null,
-                koncesionari_id: 0
+                koncesionari_id: 0,
+                koncesionar_lokacija_id: 0
             }
         }
     },
@@ -390,11 +391,11 @@ export default {
 
         selectedConcessionaire() {
 
-            if (! this.vehicleInfo || ! this.vehicleInfo.concessionaires || ! this.form.koncesionari_id) {
+            if (! this.vehicleInfo || ! this.vehicleInfo.concessionaires || ! this.form.koncesionar_lokacija_id) {
                 return null;
             }
 
-            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.koncesionari_id.toString() === this.form.koncesionari_id.toString());
+            let concessionaire = this.vehicleInfo.concessionaires.find((c) => Number(c.id) === Number(this.form.koncesionar_lokacija_id));
 
             return concessionaire ? concessionaire : null;
         }
@@ -658,7 +659,7 @@ export default {
         },
 
         onSelectConcessionaire(concessionaireId) {
-            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.koncesionari_id.toString() === concessionaireId.toString());
+            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.id.toString() === concessionaireId.toString());
 
             if (! concessionaire) {
                 return;
@@ -666,6 +667,7 @@ export default {
 
             this.form.rvBIR = concessionaire.bir.toString();
             this.form.koncesionari_id = Number(concessionaire.koncesionari_id);
+            this.form.koncesionar_lokacija_id = Number(concessionaire.id);
         },
 
         formatMileage(mileage) {
