@@ -69,9 +69,27 @@ export default {
     },
 
     computed: {
+        firstOption() {
+            return this.options [0][this.optionsValue];
+        },
+
         selectedValue() {
-            if (!this.options || !this.value) {
-                return this.options [0][this.optionsValue];
+            if (! this.optionsKey) {
+                console.error('optionsKey is required');
+                return this.firstOption;
+            }
+
+            if (!this.optionsValue) {
+                console.error('optionsValue is required');
+                return this.firstOption;
+            }
+
+            if (! this.options || ! this.options.length) {
+                return this.firstOption;
+            }
+
+            if (! this.value) {
+                return this.firstOption;
             }
 
             let option = this.options.find((o) => o [this.optionsKey].toString() === this.value.toString());
