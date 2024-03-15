@@ -390,11 +390,11 @@ export default {
 
         selectedConcessionaire() {
 
-            if (! this.vehicleInfo || ! this.vehicleInfo.concessionaires || ! this.form.rvBIR) {
+            if (! this.vehicleInfo || ! this.vehicleInfo.concessionaires || ! this.form.koncesionari_id) {
                 return null;
             }
 
-            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.bir.toString() === this.form.rvBIR.toString());
+            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.koncesionari_id.toString() === this.form.koncesionari_id.toString());
 
             return concessionaire ? concessionaire : null;
         }
@@ -658,14 +658,14 @@ export default {
         },
 
         onSelectConcessionaire(concessionaireId) {
-            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.id.toString() === concessionaireId.toString());
+            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.koncesionari_id.toString() === concessionaireId.toString());
 
             if (! concessionaire) {
                 return;
             }
 
             this.form.rvBIR = concessionaire.bir.toString();
-            this.form.koncesionari_id = Number(concessionaire.id);
+            this.form.koncesionari_id = Number(concessionaire.koncesionari_id);
         },
 
         formatMileage(mileage) {
