@@ -61,16 +61,16 @@ export default {
         kbr: 'Vpišite svoju hišnu številku',
         pb: 'Vpišite svoju poštnu številku',
         mjesto: 'Vpišite svoj kraj',
-        tel: 'Vpišite svojo telefonsko številko',
-        kontakt_kanal_email: 'Prosimo, vnesite svojo izbiro',
-        kontakt_kanal_telefon: 'Prosimo, vnesite svojo izbiro',
+        tel: 'Vpišite svojo telefonsko števiko brez presledkov ali ločil',
+        kontakt_kanal_email: 'Prosimo, označite svojo izbiro',
+        kontakt_kanal_telefon: 'Prosimo, označite svojo izbiro',
         procitane_pravne_obavijesti: 'Molimo da pročitate pravne obavijesti'
     },
     messages: {
         success: {
-            title_new_vehicle: 'Hvala za vaše povpraševanje za vozilo iz zaloge',
+            title_new_vehicle: 'Hvala za oddano povpraševanje za izbrano vozilo iz zaloge',
             title_used_vehicle: 'Hvala za vaše povpraševanje za rabljeno vozilo',
-            description_new_vehicle: 'Vaše spletno povpraševanje je posredovano izbranemu pooblaščenemu prodajalcu. Kontaktiral vas bo v najkrajšem možnem času.',
+            description_new_vehicle: 'Vaše povpraševanje za izbrano vozilo je uspešno posredovano našemu izbranemu pooblaščenemu prodajalcu. Z veseljem vas bo kontaktiral v najkrajšem možnem času, da vam posreduje vse informacije, ki jih potrebujete glede izbranega vozila. Veselimo se, da vam lahko pomagamo pri izbiri novega vozila. Hvala za vaše zaupanje!',
             description_used_vehicle: 'Vaše spletno povpraševanje je posredovano izbranemu pooblaščenemu prodajalcu. Kontaktiral vas bo v najkrajšem možnem času.'
         },
         error: {
