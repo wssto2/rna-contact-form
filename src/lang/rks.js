@@ -5,6 +5,10 @@ export default {
 	selected_concessionaire: "Dileri i zgjedhur",
 	gearbox: "Ndërruesi",
 	exterior_color: "Ngjyra",
+    exterior_color_matte: "mat",
+    exterior_color_metallic: "metalik",
+    exterior_color_pearl: "perlë",
+    exterior_color_two_tone: 'karoseri dyngjyrëshe',
 	fields:  {
 		customer_type: {
 			physical: "Person fizik",

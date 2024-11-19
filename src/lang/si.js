@@ -7,6 +7,10 @@ export default {
     interior: "Notranjost",
     gearbox: "Menjalnik",
     exterior_color: "Barva",
+    exterior_color_matte: "mat",
+    exterior_color_metallic: "metalik",
+    exterior_color_pearl: "biser",
+    exterior_color_two_tone: 'dvobarvna karoserija',
     fields:  {
         customer_type: {
             physical: "Fizična oseba",

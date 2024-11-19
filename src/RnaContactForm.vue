@@ -49,12 +49,12 @@
 
                         <h6>{{ getVehicleInfo('name') }}</h6>
                         <p>
-                            <span v-if="Number(form.novo_vozilo) !== 1">{{ getVehicleInfo('manufacture_year') }}, {{ getVehicleInfo('mileage') }} km<br></span>
-                            <span>{{ getVehicleInfo('engine_capacity') }} ccm,</span> {{ getVehicleInfo('engine_power') }} kW
+                            <span v-if="Number(form.novo_vozilo) !== 1">{{ getVehicleInfo('manufacture_year') }}., {{ formatMileage(getVehicleInfo('mileage')) }} km<br></span>
+                            <span>{{ getVehicleInfo('engine_capacity') }} ccm,</span> {{ getVehicleInfo('engine_power') }} kW ({{ getVehicleInfo('engine_power_hp') }} KS)
                             <br>
                             {{ trans('gearbox') }}: {{ getVehicleInfo('gearbox.naziv') }}<span v-if="getVehicleInfo('transmission.naziv')">, {{ getVehicleInfo('transmission.naziv') }}</span>
                             <br>
-                            {{ trans('exterior_color') }}: {{ getVehicleInfo('exterior_color') }}
+                            {{ trans('exterior_color') }}: {{ formattedColor }}
                         </p>
                     </div>
                     <div class="concessionaire-column">
@@ -487,6 +487,20 @@ export default {
             let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.id.toString() === this.form.koncesionari_id.toString());
 
             return concessionaire ? concessionaire : null;
+        },
+        formattedColor() {
+            const baseColor = this.getVehicleInfo('exterior_color');
+            const attributes = [
+            this.getVehicleInfo('exterior_color_matte') ? this.trans('exterior_color_matte') : '',
+            this.getVehicleInfo('exterior_color_metallic') ? this.trans('exterior_color_metallic') : '',
+            this.getVehicleInfo('exterior_color_pearl') ? this.trans('exterior_color_pearl') : '',
+            this.getVehicleInfo('exterior_color_two_tone') ? this.trans('exterior_color_two_tone') : ''
+            ];
+
+            const formattedAttributes = attributes.filter(attr => attr).join(', ');
+
+            // Return base color with additional attributes if present
+            return formattedAttributes ? `${baseColor}, ${formattedAttributes}` : baseColor;
         }
     },
 
@@ -816,6 +830,14 @@ export default {
 
             const clickedSpan = document.querySelector(`div.threeSixtySwitch div span.${direction}`);
             clickedSpan.classList.add('active-switch');
+        },
+
+        formatMileage(mileage) {
+            if (!mileage) {
+                return '';
+            }
+
+            return mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
     }
 }
