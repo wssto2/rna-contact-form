@@ -69,7 +69,7 @@
                                 :options="vehicleInfo.concessionaires"
                                 options-key="id"
                                 options-value="naziv"
-                                :value="form.koncesionari_id"
+                                :value="form.koncesionar_lokacija_id"
                                 @input="onSelectConcessionaire"
                                 required
                                 :error="getFieldError('select_concessionaire')" />
@@ -88,9 +88,9 @@
                             <p>
                                 {{ vehicleInfo.location.naziv_tvrtke ? vehicleInfo.location.naziv_tvrtke : vehicleInfo.concessionaire.naziv }}
                                 <br>
-                                {{ vehicleInfo.concessionaire.adresa }}
+                                {{ vehicleInfo.location.adresa ? vehicleInfo.location.adresa :  vehicleInfo.concessionaire.adresa }}
                                 <br>
-                                {{ vehicleInfo.concessionaire.pb }} {{ vehicleInfo.concessionaire.grad }}
+                                {{ vehicleInfo.location.pb ? vehicleInfo.location.pb :  vehicleInfo.concessionaire.pb }} {{ vehicleInfo.location.grad ? vehicleInfo.location.grad : vehicleInfo.concessionaire.grad }}
                             </p>
                         </template>
                     </div>
@@ -383,7 +383,8 @@ export default {
                 kontakt_kanal_sms: null,
                 kontakt_kanal_posta: null,
                 procitane_pravne_obavijesti: null,
-                koncesionari_id: 0
+                koncesionari_id: 0,
+                koncesionar_lokacija_id: 0,
             }
         }
     },
@@ -480,14 +481,16 @@ export default {
 
         selectedConcessionaire() {
 
-            if (! this.vehicleInfo || ! this.vehicleInfo.concessionaires || ! this.form.koncesionari_id) {
+            if (! this.vehicleInfo || ! this.vehicleInfo.concessionaires || ! this.form.koncesionar_lokacija_id) {
                 return null;
             }
 
-            let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.id.toString() === this.form.koncesionari_id.toString());
+            let concessionaire = this.vehicleInfo.concessionaires.find((c) => Number(c.id) === Number(this.form.koncesionar_lokacija_id));
 
             return concessionaire ? concessionaire : null;
+
         },
+
         formattedColor() {
             const baseColor = this.getVehicleInfo('exterior_color');
             const attributes = [
@@ -647,6 +650,14 @@ export default {
                     valid = this.form [field] !== null;
                 }
 
+                /**
+                 * @jzlimen - 12.03.2024. - Validacija nije radila iz razloga sto se nakon odabira koncesionara u selectu
+                 * kod validacije provjeravalo nepostojece polje 'select_concessionaire' forme umjesto 'koncesionari_id'.
+                 */
+                if (field === 'select_concessionaire') {
+                    valid = Number(this.form ['koncesionari_id']) > 0;
+                }
+
                 if (!valid) {
                     errors.push(field);
                 }
@@ -757,7 +768,8 @@ export default {
             }
 
             this.form.rvBIR = concessionaire.bir.toString();
-            this.form.koncesionari_id = Number(concessionaire.id);
+            this.form.koncesionari_id = Number(concessionaire.koncesionari_id);
+            this.form.koncesionar_lokacija_id = Number(concessionaire.id);
         },
 
         fireGoogleAnalyticsEvents() {
