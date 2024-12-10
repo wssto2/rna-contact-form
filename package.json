@@ -15,7 +15,11 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode=production",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "buildOld": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/main.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/main.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/main.min.js"
   },
   "dependencies": {
     "@deviznet/vue-product-360": "^1.0.3-beta",
