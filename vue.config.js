@@ -1,3 +1,10 @@
 module.exports = {
-    filenameHashing: false
+    filenameHashing: false,
+    configureWebpack: config => {
+        optimization = {
+            concatenateModules: false,
+            providedExports: false,
+            usedExports: false
+        }
+    }
 }
