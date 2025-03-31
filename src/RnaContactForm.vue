@@ -173,6 +173,7 @@
                     :label="trans('fields.city')"
                     name="mjesto"
                     v-model="form.mjesto"
+                    :required="params.country === 'ba'"
                     :error="getFieldError('mjesto')" />
 
                 <!-- Broj telefona -->
@@ -181,6 +182,7 @@
                     name="tel"
                     :help="trans('fields.telephone_help')"
                     v-model="form.tel"
+                    :required="params.country === 'ba'"
                     :error="getFieldError('tel')" />
 
                 <!-- Poruka -->
@@ -462,6 +464,10 @@ export default {
 
             if (this.vehicleInfo.rnaStock) {
                 requiredFields.push('select_concessionaire');
+            }
+
+            if (this.params.country === 'ba') {
+                requiredFields.push('mjesto', 'tel');
             }
 
             return requiredFields;
