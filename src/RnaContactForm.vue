@@ -9,28 +9,33 @@
                 <p v-html="trans('messages.vehicle_not_found.description')"></p>
             </div>
 
-            <div v-if="!isVehicleInfoError && !isSubmitting && !isError && isSubmitted" class="customer-details-content c_056_1">
-                <h2>{{ Number(form.novo_vozilo) === 1 ? trans('messages.success.title_new_vehicle') : trans('messages.success.title_used_vehicle') }}</h2>
-                <p v-html="Number(form.novo_vozilo) === 1 ? trans('messages.success.description_new_vehicle') : trans('messages.success.description_used_vehicle')"></p>
+            <div v-if="!isVehicleInfoError && !isSubmitting && !isError && isSubmitted"
+                class="customer-details-content c_056_1">
+                <h2>{{ Number(form.novo_vozilo) === 1 ? trans('messages.success.title_new_vehicle') :
+                    trans('messages.success.title_used_vehicle') }}</h2>
+                <p
+                    v-html="Number(form.novo_vozilo) === 1 ? trans('messages.success.description_new_vehicle') : trans('messages.success.description_used_vehicle')">
+                </p>
             </div>
 
             <div v-if="!isVehicleInfoError && !isSubmitting && isError" class="customer-details-content c_056_1">
-                <h2>{{ Number(form.novo_vozilo) === 1 ? trans('messages.error.title_new_vehicle') : trans('messages.error.title_used_vehicle') }}</h2>
-                <p v-html="Number(form.novo_vozilo) === 1 ? trans('messages.error.description_new_vehicle') : trans('messages.error.description_used_vehicle')"></p>
+                <h2>{{ Number(form.novo_vozilo) === 1 ? trans('messages.error.title_new_vehicle') :
+                    trans('messages.error.title_used_vehicle') }}</h2>
+                <p
+                    v-html="Number(form.novo_vozilo) === 1 ? trans('messages.error.description_new_vehicle') : trans('messages.error.description_used_vehicle')">
+                </p>
             </div>
 
-            <div v-if="!isVehicleInfoError && !isSubmitting && !isSubmitted && !isError && vehicleInfo" class="vehicle-info">
+            <div v-if="!isVehicleInfoError && !isSubmitting && !isSubmitted && !isError && vehicleInfo"
+                class="vehicle-info">
                 <template v-if="!isVehicleInfoLoading && isVehicleInfoLoaded">
                     <div class="vehicle-column">
                         <h3 class="column-heading">{{ trans('selected_vehicle') }}</h3>
 
                         <div v-if="getVehicleInfo('has_three_sixty') === true" style="position:relative;">
                             <div v-show="showCarouselPointer" class="threeSixtyPointer"></div>
-                            <vue-product-360
-                                style="cursor: pointer;"
-                                :images="threeSixtyImages"
-                                @starting="showCarouselPointer = false"
-                                @stopping="showCarouselPointer = true" />
+                            <vue-product-360 style="cursor: pointer;" :images="threeSixtyImages"
+                                @starting="showCarouselPointer = false" @stopping="showCarouselPointer = true" />
                         </div>
                         <template v-else>
                             <img v-if="vehicleThumbnailUrl" :src="vehicleThumbnailUrl" alt="">
@@ -38,18 +43,22 @@
 
                         <h6>{{ getVehicleInfo('name') }}</h6>
                         <p>
-                            <span v-if="Number(form.novo_vozilo) !== 1">{{ getVehicleInfo('manufacture_year') }}, {{ formatMileage(getVehicleInfo('mileage')) }} km<br></span>
-                            <span>{{ getVehicleInfo('engine_capacity') }} ccm,</span> {{ getVehicleInfo('engine_power') }} kW
+                            <span v-if="Number(form.novo_vozilo) !== 1">{{ getVehicleInfo('manufacture_year') }}, {{
+                                formatMileage(getVehicleInfo('mileage')) }} km<br></span>
+                            <span>{{ getVehicleInfo('engine_capacity') }} ccm,</span> {{ getVehicleInfo('engine_power')
+                            }} kW
                             <br>
-                            {{ trans('gearbox') }}: {{ getVehicleInfo('gearbox.naziv') }}<span v-if="getVehicleInfo('transmission.naziv')">, {{ getVehicleInfo('transmission.naziv') }}</span>
+                            {{ trans('gearbox') }}: {{ getVehicleInfo('gearbox.naziv') }}<span
+                                v-if="getVehicleInfo('transmission.naziv')">, {{
+                                getVehicleInfo('transmission.naziv') }}</span>
                             <br>
                             {{ trans('exterior_color') }}:
-                            {{ 
-                                getVehicleInfo('exterior_color') 
-                                + (getVehicleInfo('exterior_color_metallic') ? ', ' + trans('exterior_color_metallic') : '') 
-                                + (getVehicleInfo('exterior_color_pearl') ? ', ' + trans('exterior_color_pearl') : '') 
-                                + (getVehicleInfo('exterior_color_matte') ? ', ' + trans('exterior_color_matte') : '') 
-                                + (getVehicleInfo('exterior_color_two_tone') ? ', ' + trans('exterior_color_two_tone') : '') 
+                            {{
+                                getVehicleInfo('exterior_color')
+                                + (getVehicleInfo('exterior_color_metallic') ? ', ' + trans('exterior_color_metallic') : '')
+                                + (getVehicleInfo('exterior_color_pearl') ? ', ' + trans('exterior_color_pearl') : '')
+                                + (getVehicleInfo('exterior_color_matte') ? ', ' + trans('exterior_color_matte') : '')
+                                + (getVehicleInfo('exterior_color_two_tone') ? ', ' + trans('exterior_color_two_tone') : '')
                             }}
                         </p>
                     </div>
@@ -58,16 +67,9 @@
                             <h3 class="column-heading">{{ trans('selected_concessionaire') }}</h3>
 
                             <!-- Koncesionari -->
-                            <SelectField
-                                style="margin-bottom: 30px;"
-                                full-width
-                                name="select_concessionaire"
-                                :options="vehicleInfo.concessionaires"
-                                options-key="id"
-                                options-value="naziv"
-                                :value="form.koncesionar_lokacija_id"
-                                @input="onSelectConcessionaire"
-                                required
+                            <SelectField style="margin-bottom: 30px;" full-width name="select_concessionaire"
+                                :options="vehicleInfo.concessionaires" options-key="id" options-value="naziv"
+                                :value="form.koncesionar_lokacija_id" @input="onSelectConcessionaire" required
                                 :error="getFieldError('select_concessionaire')" />
 
                             <template v-if="selectedConcessionaire">
@@ -82,81 +84,55 @@
                         <template v-else>
                             <h3 class="column-heading">{{ trans('selected_concessionaire') }}</h3>
                             <p>
-                                {{ vehicleInfo.location.naziv_tvrtke ? vehicleInfo.location.naziv_tvrtke : vehicleInfo.concessionaire.naziv }}
+                                {{ vehicleInfo.location.naziv_tvrtke ? vehicleInfo.location.naziv_tvrtke :
+                                vehicleInfo.concessionaire.naziv }}
                                 <br>
-                                {{ vehicleInfo.location.adresa ? vehicleInfo.location.adresa :  vehicleInfo.concessionaire.adresa }}
+                                {{ vehicleInfo.location.adresa ? vehicleInfo.location.adresa :
+                                vehicleInfo.concessionaire.adresa }}
                                 <br>
-                                {{ vehicleInfo.location.pb ? vehicleInfo.location.pb :  vehicleInfo.concessionaire.pb }} {{ vehicleInfo.location.grad ? vehicleInfo.location.grad : vehicleInfo.concessionaire.grad }}
+                                {{ vehicleInfo.location.pb ? vehicleInfo.location.pb : vehicleInfo.concessionaire.pb }}
+                                {{ vehicleInfo.location.grad ? vehicleInfo.location.grad :
+                                vehicleInfo.concessionaire.grad }}
                             </p>
                         </template>
                     </div>
                 </template>
             </div>
 
-            <form v-if="!isVehicleInfoError && !isVehicleInfoLoading && !isSubmitting && !isSubmitted && !isError" method="post" class="customer-details-content" novalidate @change.passive="onFormChange" @submit.prevent="onSubmit">
+            <form v-if="!isVehicleInfoError && !isVehicleInfoLoading && !isSubmitting && !isSubmitted && !isError"
+                method="post" class="customer-details-content" novalidate @change.passive="onFormChange"
+                @submit.prevent="onSubmit">
                 <!-- Vrsta korisnika -->
-                <CustomerType
-                    :physical-label="trans('fields.customer_type.physical')"
+                <CustomerType :physical-label="trans('fields.customer_type.physical')"
                     :legal-label="trans('fields.customer_type.legal')"
-                    :legal-label-renault="trans('fields.customer_type.legal_renault')"
-                    v-model="form.pravna_osoba" />
+                    :legal-label-renault="trans('fields.customer_type.legal_renault')" v-model="form.pravna_osoba" />
 
                 <!-- Titula korisnika -->
-                <SelectField
-                    :label="trans('fields.status.status')"
-                    name="status"
-                    :options="statusOptions"
-                    v-model="form.status"
-                    required
-                    :error="getFieldError('status')" />
+                <SelectField :label="trans('fields.status.status')" name="status" :options="statusOptions"
+                    v-model="form.status" required :error="getFieldError('status')" />
 
                 <!-- Ime -->
-                <TextField
-                    :label="trans('fields.name')"
-                    name="ime"
-                    v-model="form.ime"
-                    required
+                <TextField :label="trans('fields.name')" name="ime" v-model="form.ime" required
                     :error="getFieldError('ime')" />
 
                 <!-- Prezime -->
-                <TextField
-                    :label="trans('fields.last_name')"
-                    name="prezime"
-                    v-model="form.prezime"
-                    required
+                <TextField :label="trans('fields.last_name')" name="prezime" v-model="form.prezime" required
                     :error="getFieldError('prezime')" />
 
                 <!-- Tvrtka -->
-                <TextField
-                    v-show="Number(form.pravna_osoba) === 1"
-                    :label="trans('fields.company')"
-                    name="tvrtka"
-                    v-model="form.tvrtka"
-                    required
-                    :error="getFieldError('tvrtka')" />
+                <TextField v-show="Number(form.pravna_osoba) === 1" :label="trans('fields.company')" name="tvrtka"
+                    v-model="form.tvrtka" required :error="getFieldError('tvrtka')" />
 
                 <!-- Email -->
-                <TextField
-                    :label="trans('fields.email')"
-                    name="email"
-                    v-model="form.email"
-                    required
+                <TextField :label="trans('fields.email')" name="email" v-model="form.email" required
                     :error="getFieldError('email')" />
 
                 <!-- Broj telefona -->
-                <TextField
-                    :label="trans('fields.telephone')"
-                    name="tel"
-                    :help="trans('fields.telephone_help')"
-                    v-model="form.tel"
-                    required
-                    :error="getFieldError('tel')" />
+                <TextField :label="trans('fields.telephone')" name="tel" :help="trans('fields.telephone_help')"
+                    v-model="form.tel" required :error="getFieldError('tel')" />
 
                 <!-- Poruka -->
-                <TextareaField
-                    :label="trans('fields.message')"
-                    name="poruka"
-                    v-model="form.poruka"
+                <TextareaField :label="trans('fields.message')" name="poruka" v-model="form.poruka"
                     :error="getFieldError('poruka')" />
 
                 <!-- GDPR -->
@@ -164,28 +140,17 @@
                     <p v-html="trans('gdpr_title_' + params.brand)"></p>
 
                     <!-- GDPR: Email -->
-                    <GdprRadio
-                        :label="trans('fields.gdpr_contact_email')"
-                        name="kontakt_kanal_email"
-                        v-model="form.kontakt_kanal_email"
-                        :yes-label="trans('yes')"
-                        :no-label="trans('no')"
-                        required
+                    <GdprRadio :label="trans('fields.gdpr_contact_email')" name="kontakt_kanal_email"
+                        v-model="form.kontakt_kanal_email" :yes-label="trans('yes')" :no-label="trans('no')" required
                         :error="getFieldError('kontakt_kanal_email')" />
 
                     <!-- GDPR: Telefon -->
-                    <GdprRadio
-                        :label="trans('fields.gdpr_contact_telephone')"
-                        name="kontakt_kanal_telefon"
-                        v-model="form.kontakt_kanal_telefon"
-                        :yes-label="trans('yes')"
-                        :no-label="trans('no')"
-                        required
+                    <GdprRadio :label="trans('fields.gdpr_contact_telephone')" name="kontakt_kanal_telefon"
+                        v-model="form.kontakt_kanal_telefon" :yes-label="trans('yes')" :no-label="trans('no')" required
                         :error="getFieldError('kontakt_kanal_telefon')" />
                 </div>
 
-                <LegalStatement
-                    :content="trans('legal_disclaimer_text_' + params.brand)" />
+                <LegalStatement :content="trans('legal_disclaimer_text_' + params.brand)" />
 
                 <div class="submit-form">
                     <button autocomplete="off" type="submit" class="submit-form-button">{{ trans('submit') }}</button>
@@ -196,15 +161,15 @@
 </template>
 
 <script>
+import VueProduct360 from "@deviznet/vue-product-360";
 import axios from "axios";
-import { getObjectValueByKey } from "./utils/helpers";
+import CustomerType from "./components/CustomerType.vue";
+import GdprRadio from "./components/GdprRadio.vue";
+import LegalStatement from "./components/LegalStatement.vue";
+import SelectField from "./components/SelectField.vue";
 import TextField from "./components/TextField.vue";
 import TextareaField from "./components/TextareaField.vue";
-import SelectField from "./components/SelectField.vue";
-import GdprRadio from "./components/GdprRadio.vue";
-import CustomerType from "./components/CustomerType.vue";
-import LegalStatement from "./components/LegalStatement.vue";
-import VueProduct360 from "@deviznet/vue-product-360";
+import { getObjectValueByKey } from "./utils/helpers";
 
 import './assets/css/base.css';
 
@@ -330,19 +295,19 @@ export default {
     computed: {
 
         vehicleThumbnailUrl() {
-            if (! this.params.vehicleId || ! this.vehicleInfo.photos || ! this.vehicleInfo.photos [0]) {
+            if (!this.params.vehicleId || !this.vehicleInfo.photos || !this.vehicleInfo.photos[0]) {
                 return;
             }
 
-            if (Number(this.vehicleInfo.photos [0].source) === 4) {
-                return this.vehicleInfo.photos [0].url;
+            if (Number(this.vehicleInfo.photos[0].source) === 4) {
+                return this.vehicleInfo.photos[0].url;
             }
 
-            if ( this.vehicleInfo.thumbnail) {
+            if (this.vehicleInfo.thumbnail) {
                 return this.vehicleInfo.thumbnail;
             }
 
-            return `https://static.rabljena-vozila.com/${this.params.country}/rabljena_vozila/${this.params.vehicleId}/1/${this.vehicleInfo.photos [0].id}`;
+            return `https://static.rabljena-vozila.com/${this.params.country}/rabljena_vozila/${this.params.vehicleId}/1/${this.vehicleInfo.photos[0].id}`;
         },
 
         statusOptions() {
@@ -382,7 +347,7 @@ export default {
         },
 
         threeSixtyImages() {
-            if (! this.vehicleInfo || ! this.vehicleInfo.photos || typeof this.vehicleInfo.photos !== "object") {
+            if (!this.vehicleInfo || !this.vehicleInfo.photos || typeof this.vehicleInfo.photos !== "object") {
                 return [];
             }
 
@@ -391,7 +356,7 @@ export default {
 
         selectedConcessionaire() {
 
-            if (! this.vehicleInfo || ! this.vehicleInfo.concessionaires || ! this.form.koncesionar_lokacija_id) {
+            if (!this.vehicleInfo || !this.vehicleInfo.concessionaires || !this.form.koncesionar_lokacija_id) {
                 return null;
             }
 
@@ -419,13 +384,13 @@ export default {
             switch (this.params.brand) {
                 case 'renault':
                     require('./assets/css/renault_fonts.css');
-                break;
+                    break;
                 case 'dacia':
                     require('./assets/css/dacia_fonts.css');
-                break;
+                    break;
                 case 'nissan':
                     require('./assets/css/nissan_fonts.css');
-                break;
+                    break;
             }
 
 
@@ -438,7 +403,7 @@ export default {
         },
 
         fetchVehicleInfo() {
-            if (! this.params.vehicleId) {
+            if (!this.params.vehicleId) {
                 return;
             }
 
@@ -456,7 +421,7 @@ export default {
                     this.vehicleInfo = response.data;
 
                     if (this.vehicleInfo.concessionaires && this.vehicleInfo.concessionaires.length > 0) {
-                        this.vehicleInfo.concessionaires = [{ id: 0, naziv: 'Odaberite'}, ...this.vehicleInfo.concessionaires];
+                        this.vehicleInfo.concessionaires = [{ id: 0, naziv: 'Odaberite' }, ...this.vehicleInfo.concessionaires];
                     }
 
                     this.form.rvBIR = response.data.concessionaire.bir.toString();
@@ -483,7 +448,7 @@ export default {
                 mk: "https://koristeni-vozila.renault.mk/",
             }
 
-            return arvUrls [country] || arvUrls [this.params.country];
+            return arvUrls[country] || arvUrls[this.params.country];
         },
 
         resolveEndpoints() {
@@ -502,9 +467,9 @@ export default {
                 let parts = param.split('.');
 
                 for (let partIndex in parts) {
-                    let part = parts [partIndex];
-                    if (obj [part]) {
-                        obj = obj [part];
+                    let part = parts[partIndex];
+                    if (obj[part]) {
+                        obj = obj[part];
                     } else {
                         return '';
                     }
@@ -513,12 +478,12 @@ export default {
                 return obj;
             }
 
-            return obj [param] || '';
+            return obj[param] || '';
         },
 
         getFieldError(field) {
             if (this.validatorErrors.length > 0 && this.validatorErrors.indexOf(field) !== -1) {
-                return this.errorMessages [field] || 'Molimo popunite obavezno polje!';
+                return this.errorMessages[field] || 'Molimo popunite obavezno polje!';
             }
 
             return null;
@@ -529,23 +494,23 @@ export default {
 
             let errors = [];
             for (let fieldIndex in this.requiredFields) {
-                let field = this.requiredFields [fieldIndex];
-                let valid = !!this.form [field];
+                let field = this.requiredFields[fieldIndex];
+                let valid = !!this.form[field];
 
                 if (valid && field === 'status') {
-                    valid = Number(this.form [field]) > 0;
+                    valid = Number(this.form[field]) > 0;
                 }
 
                 if (valid && field === 'email') {
-                    valid = this.validateEmail(this.form [field]);
+                    valid = this.validateEmail(this.form[field]);
                 }
 
                 if (field === 'kontakt_kanal_email') {
-                    valid = this.form [field] !== null;
+                    valid = this.form[field] !== null;
                 }
 
                 if (field === 'kontakt_kanal_telefon') {
-                    valid = this.form [field] !== null;
+                    valid = this.form[field] !== null;
                 }
 
                 /**
@@ -553,7 +518,7 @@ export default {
                  * kod validacije provjeravalo nepostojece polje 'select_concessionaire' forme umjesto 'koncesionari_id'.
                  */
                 if (field === 'select_concessionaire') {
-                    valid = Number(this.form ['koncesionari_id']) > 0;
+                    valid = Number(this.form['koncesionari_id']) > 0;
                 }
 
                 if (!valid) {
@@ -596,7 +561,7 @@ export default {
 
             if (this.validatorErrors.length === 0) {
                 this.createGdprScreenshot().then(() => {
-                    if (! this.screenshotTest) {
+                    if (!this.screenshotTest) {
                         this.submitToMainServer();
                     }
                 });
@@ -606,8 +571,8 @@ export default {
         prepareFormData() {
             let formData = new FormData;
             for (let key in this.form) {
-                if (this.form [key] !== null) {
-                    formData.append(key, this.form [key]);
+                if (this.form[key] !== null) {
+                    formData.append(key, this.form[key]);
                 }
             }
             return formData
@@ -661,7 +626,7 @@ export default {
         onSelectConcessionaire(concessionaireId) {
             let concessionaire = this.vehicleInfo.concessionaires.find((c) => c.id.toString() === concessionaireId.toString());
 
-            if (! concessionaire) {
+            if (!concessionaire) {
                 return;
             }
 
@@ -672,7 +637,7 @@ export default {
 
         formatMileage(mileage) {
             let mileageStr = String(mileage);
-            
+
             let formattedMileage = "";
             let count = 0;
             for (let i = mileageStr.length - 1; i >= 0; i--) {
@@ -682,7 +647,7 @@ export default {
                     formattedMileage = "." + formattedMileage;
                 }
             }
-            
+
             return formattedMileage;
         },
 
@@ -702,33 +667,33 @@ export default {
         fireGoogleTagManagerFormOpenedEvent() {
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
-                'formType' : 'purchase_request',
-                'formCategory' : 'lead_newcar',
-                'formStepName' : 'start',
-                'formStepNumber' : 'step-0',
-                'event' : 'formOpen',
-                'pageType' : 'form',
-                'businessType' : 'new-car',
-                'dealerName' : this.vehicleInfo.concessionaire && this.vehicleInfo.concessionaire.naziv,
-                'dealerId' : this.form.rvBIR,
-                'vehicleModel' : this.vehicleInfo.name,
-                'vehicleId' : this.form.rvID
+                'formType': 'purchase_request',
+                'formCategory': Number(this.form.novo_vozilo) === 1 ? 'new_car' : 'renew_car',
+                'formStepName': 'start',
+                'formStepNumber': 'step-0',
+                'event': 'formOpen',
+                'pageType': 'form',
+                'businessType': Number(this.form.novo_vozilo) === 1 ? 'new-car' : 'renew-car',
+                'dealerName': this.vehicleInfo.concessionaire && this.vehicleInfo.concessionaire.naziv,
+                'dealerId': this.form.rvBIR,
+                'vehicleModel': this.vehicleInfo.name,
+                'vehicleId': this.form.rvID
             });
         },
 
-        fireGoogleTagManagerFormSubmitEvent: function() {
+        fireGoogleTagManagerFormSubmitEvent: function () {
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
-                'formType' : 'purchase_request',
-                'formCategory' : 'lead_newcar',
-                'leadId' : '',
-                'event' : 'formValidate',
-                'pageType' : 'form',
-                'businessType' : 'new-car',
-                'dealerName' : this.vehicleInfo.concessionaire && this.vehicleInfo.concessionaire.naziv,
-                'dealerId' : this.form.rvBIR,
-                'vehicleModel' : this.vehicleInfo.name,
-                'vehicleId' : this.form.rvID
+                'formType': 'purchase_request',
+                'formCategory': Number(this.form.novo_vozilo) === 1 ? 'new_car' : 'renew_car',
+                'leadId': '',
+                'event': 'formValidate',
+                'pageType': 'form',
+                'businessType': Number(this.form.novo_vozilo) === 1 ? 'new-car' : 'renew-car',
+                'dealerName': this.vehicleInfo.concessionaire && this.vehicleInfo.concessionaire.naziv,
+                'dealerId': this.form.rvBIR,
+                'vehicleModel': this.vehicleInfo.name,
+                'vehicleId': this.form.rvID
             });
         },
     }
