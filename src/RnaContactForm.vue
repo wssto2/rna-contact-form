@@ -795,12 +795,12 @@ export default {
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
                 'formType' : 'purchase_request',
-                'formCategory' : 'lead_newcar',
+                'formCategory' : Number(this.form.novo_vozilo) === 1 ? 'new_car' : 'renew_car',
                 'formStepName' : 'start',
                 'formStepNumber' : 'step-0',
                 'event' : 'formOpen',
                 'pageType' : 'form',
-                'businessType' : 'new-car',
+                'businessType' : Number(this.form.novo_vozilo) === 1 ? 'new-car' : 'renew-car',
                 'dealerName' : this.vehicleInfo.concessionaire && this.vehicleInfo.concessionaire.naziv,
                 'dealerId' : this.form.rvBIR,
                 'vehicleModel' : this.vehicleInfo.name,
@@ -812,11 +812,11 @@ export default {
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
                 'formType' : 'purchase_request',
-                'formCategory' : 'lead_newcar',
+                'formCategory' : Number(this.form.novo_vozilo) === 1 ? 'new_car' : 'renew_car',
                 'leadId' : '',
                 'event' : 'formValidate',
                 'pageType' : 'form',
-                'businessType' : 'new-car',
+                'businessType' : Number(this.form.novo_vozilo) === 1 ? 'new-car' : 'renew-car',
                 'dealerName' : this.vehicleInfo.concessionaire && this.vehicleInfo.concessionaire.naziv,
                 'dealerId' : this.form.rvBIR,
                 'vehicleModel' : this.vehicleInfo.name,
