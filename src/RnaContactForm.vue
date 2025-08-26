@@ -50,7 +50,7 @@
                             <br>
                             {{ trans('gearbox') }}: {{ getVehicleInfo('gearbox.naziv') }}<span
                                 v-if="getVehicleInfo('transmission.naziv')">, {{
-                                getVehicleInfo('transmission.naziv') }}</span>
+                                    getVehicleInfo('transmission.naziv') }}</span>
                             <br>
                             {{ trans('exterior_color') }}:
                             {{
@@ -85,14 +85,14 @@
                             <h3 class="column-heading">{{ trans('selected_concessionaire') }}</h3>
                             <p>
                                 {{ vehicleInfo.location.naziv_tvrtke ? vehicleInfo.location.naziv_tvrtke :
-                                vehicleInfo.concessionaire.naziv }}
+                                    vehicleInfo.concessionaire.naziv }}
                                 <br>
                                 {{ vehicleInfo.location.adresa ? vehicleInfo.location.adresa :
-                                vehicleInfo.concessionaire.adresa }}
+                                    vehicleInfo.concessionaire.adresa }}
                                 <br>
                                 {{ vehicleInfo.location.pb ? vehicleInfo.location.pb : vehicleInfo.concessionaire.pb }}
                                 {{ vehicleInfo.location.grad ? vehicleInfo.location.grad :
-                                vehicleInfo.concessionaire.grad }}
+                                    vehicleInfo.concessionaire.grad }}
                             </p>
                         </template>
                     </div>
@@ -676,8 +676,9 @@ export default {
                 'businessType': Number(this.form.novo_vozilo) === 1 ? 'new-car' : 'renew-car',
                 'dealerName': this.vehicleInfo.concessionaire && this.vehicleInfo.concessionaire.naziv,
                 'dealerId': this.form.rvBIR,
+                'vehicleId': this.form.rvID,
                 'vehicleModel': this.vehicleInfo.name,
-                'vehicleId': this.form.rvID
+                'carLabel': this.vehicleInfo.model_name || '',
             });
         },
 
@@ -692,8 +693,9 @@ export default {
                 'businessType': Number(this.form.novo_vozilo) === 1 ? 'new-car' : 'renew-car',
                 'dealerName': this.vehicleInfo.concessionaire && this.vehicleInfo.concessionaire.naziv,
                 'dealerId': this.form.rvBIR,
+                'vehicleId': this.form.rvID,
                 'vehicleModel': this.vehicleInfo.name,
-                'vehicleId': this.form.rvID
+                'carLabel': this.vehicleInfo.model_name || '',
             });
         },
     }
