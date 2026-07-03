@@ -9,7 +9,9 @@
                     :required="required"
                     type="text"
                     :class="[{'isInvalid': error}]"
-                    @input="$emit('input', $event.target.value)"
+                    @input="onInput"
+                    @keydown="phone ? onPhoneKeydown($event) : null"
+                    @paste="phone ? onPhonePaste($event) : null"
                     placeholder=" "
                 >
                 <label v-if="label" :for="name">{{ label }}</label>
@@ -25,6 +27,8 @@
 </template>
 
 <script>
+const PHONE_RE = /^[+\d]*$/;
+
 export default {
     name: "TextField",
 
@@ -53,6 +57,41 @@ export default {
 
         error: {
             type: String
+        },
+
+        phone: {
+            type: Boolean,
+            default: false
+        }
+    },
+
+    methods: {
+        onInput(event) {
+            if (this.phone) {
+                const clean = event.target.value.replace(/[^+\d]/g, '');
+                if (event.target.value !== clean) {
+                    event.target.value = clean;
+                }
+                this.$emit('input', clean);
+            } else {
+                this.$emit('input', event.target.value);
+            }
+        },
+
+        onPhoneKeydown(event) {
+            const allowed = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Tab', 'Home', 'End'];
+            if (allowed.includes(event.key)) return;
+            if (event.ctrlKey || event.metaKey) return; // allow copy/paste shortcuts
+            if (!PHONE_RE.test(event.key)) {
+                event.preventDefault();
+            }
+        },
+
+        onPhonePaste(event) {
+            event.preventDefault();
+            const pasted = (event.clipboardData || window.clipboardData).getData('text');
+            const clean = pasted.replace(/[^+\d]/g, '');
+            document.execCommand('insertText', false, clean);
         }
     }
 }
