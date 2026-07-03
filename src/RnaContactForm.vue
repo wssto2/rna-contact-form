@@ -271,6 +271,7 @@ export default {
 
   data() {
     return {
+      submitTest: false,
       params: {
         brand: 'nissan',
         country: 'hr',
@@ -713,6 +714,16 @@ export default {
       this.isSubmitting = true;
       this.isSubmitted = false;
       this.isError = false;
+
+      if (this.submitTest) {
+        this.isSubmitting = false;
+        this.isSubmitted = true;
+        this.isError = false;
+
+        console.log("Form submitted to test endpoint. No data sent to main server.");
+        console.log("Form data:", this.prepareFormData());
+        return;
+      }
 
       axios.post(this.submitEndpoint, this.prepareFormData()).then((response) => {
 
