@@ -328,6 +328,7 @@ export default {
         kbr: null,
         pb: null,
         mjesto: null,
+        grad_id: null,
         poruka: null,
         kontakt_kanal_email: null,
         kontakt_kanal_telefon: null,
@@ -416,7 +417,7 @@ export default {
       }
 
       if (this.params.country === 'ba') {
-        requiredFields.push('mjesto', 'tel');
+        requiredFields.push('mjesto');
       }
 
       return requiredFields;
@@ -459,6 +460,14 @@ export default {
 
       // Return base color with additional attributes if present
       return formattedAttributes ? `${baseColor}, ${formattedAttributes}` : baseColor;
+    }
+  },
+
+  watch: {
+    'form.mjesto'(newVal) {
+      if (!newVal) {
+        this.form.grad_id = null;
+      }
     }
   },
 
@@ -730,7 +739,8 @@ export default {
     },
 
     onCitySelected(option) {
-      this.form.mjesto = option.label;
+      this.form.mjesto = String(option.label);
+      this.form.grad_id = option.value;
       if (option.description) {
         this.form.pb = option.description;
       }
