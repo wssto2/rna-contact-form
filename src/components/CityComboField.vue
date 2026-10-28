@@ -91,7 +91,7 @@ export default {
         const { data } = await axios.get(this.apiUrl, {
           params: { query: this.inputValue, limit: 10 },
         });
-        this.suggestions = Array.isArray(data) ? data : (data.data ?? []);
+        this.suggestions = Array.isArray(data) ? data : (data.data || []);
         this.activeIndex = -1;
         this.isOpen = this.suggestions.length > 0;
         this.$nextTick(() => {
